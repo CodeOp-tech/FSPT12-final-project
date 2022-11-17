@@ -39,7 +39,7 @@ export default function RecipesA() {
   let dietAPI = diet.map((e)=>e.value);
   let mealTypeAPI = mealType.map((e)=>e.value);
 
-  
+  console.log(process.env.REACT_APP_API_KEY);
    const getRecipes = async() => {
     const api = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=6&addRecipeInformation=true`);
     const data = await api.json();
