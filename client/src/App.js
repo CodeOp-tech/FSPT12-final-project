@@ -6,8 +6,6 @@ import LoginA from "./components/LoginA";
 import PaymentA from "./components/PaymentA";
 import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
-import Test from "./components/Test";
-import SeonaidBranchTest from "./components/SeonaidBranchTest";
 import Other from "./components/Other";
 
 function App() {
@@ -26,8 +24,6 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Test />
-      <SeonaidBranchTest />
       <Routes>
         <Route path="other" element={<Other />} />
         <Route path="login" element={<LoginA />} />
