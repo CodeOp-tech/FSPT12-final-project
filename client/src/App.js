@@ -6,7 +6,11 @@ import LoginA from "./components/LoginA";
 import PaymentA from "./components/PaymentA";
 import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
+<<<<<<< HEAD
 import Test from "./components/Test";
+=======
+import SeonaidBranchTest from "./components/SeonaidBranchTest";
+>>>>>>> main
 import Other from "./components/Other";
 
 function App() {
@@ -25,7 +29,11 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+<<<<<<< HEAD
       <Test />
+=======
+      <SeonaidBranchTest />
+>>>>>>> main
       <Routes>
         <Route path="other" element={<Other />} />
         <Route path="login" element={<LoginA />} />
