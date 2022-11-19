@@ -5,6 +5,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { Link } from "react-router-dom";
 
 const animatedComponents = makeAnimated();
 
@@ -164,6 +165,9 @@ export default function RecipesA() {
        <Card.Header>{recipe.title}</Card.Header>
        <Card.Img src={recipe.image} alt={recipe.title} />
        <Button variant="primary">Add recipe</Button>
+       <Link to={`/recipeinfo/${recipe.id}`}>
+       <Button>View Recipe</Button>
+       </Link>
     </Card>      
     </SplideSlide> 
       )
