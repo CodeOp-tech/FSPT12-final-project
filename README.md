@@ -1,26 +1,34 @@
 # FSPT12-final-project
 
-Safi's feature
-Kriska's feature
-Hi..
+Kriska scaffolded (thanks!)
 
-# How to run mySQL database
+# For all teammates: Github Collab instructions: 
 
-1. Create .env file in the root directory with the following structure:
+And after every pull, remember to npm install in both back and front end
 
-DB_HOST=localhost
-DB_USER=root
-DB_NAME=recipe_app
-DB_PASS=your_password
+![](client/src/Screen%20Shot%202022-11-16%20at%207.05.37%20PM.png)
+![](client/src/Screen%20Shot%202022-11-16%20at%207.05.57%20PM.png)
+![](client/src/Screen%20Shot%202022-11-16%20at%207.06.14%20PM.png)
+![](client/src/Screen%20Shot%202022-11-16%20at%207.06.27%20PM.png)
 
-2. Open a new terminal for mysql and run: 
+# Spoonacular API 
 
+Nadezda wrote "You probably cannot run the recipe search engine unless you create an .env file in the client folder and add there
+
+ REACT_APP_API_KEY=YOUR_SPOONACULAR_API_KEY 
+ 
+ that you get when signing up to the spoonacular api"
+
+ # To create mysql database:
 mysql -u root -p
 
-Provide your password. 
+# Dependencies
 
-Create a database called "recipe_app" with the command "create database recipe_app" 
-
-3. In the root folder, run another terminal, run "npm run migrate". This should create all four tables: users, recipes_saved, ingredients and orders 
-
-
+Axios
+bcrypt
+Jwt (jsonwebtoken)
+Font awesome
+mdb-react-ui-kit
+react-icons
+bootstrap
+react-bootstrap
