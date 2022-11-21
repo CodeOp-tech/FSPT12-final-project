@@ -54,9 +54,8 @@ export default function SavedRecipes() {
       <Card style={{"width":"10rem", "fontSize": "10"}} key={recipe.recipe_ID}>
        <Card.Header>{recipe.recipe_title}</Card.Header>
        <Card.Img src={recipe.recipe_image} alt={recipe.recipe_title} />       
-       <a href={`${recipe.recipe_summary}`} target="_blank">
-       <Button>View recipe</Button>
-       </a>
+       <Button href={`${recipe.recipe_summary}`} target="_blank">View recipe</Button>
+       <Button>Add to cart</Button>       
        <Button onClick={() => deleteRecipe(recipe.recipe_ID)}>Delete recipe</Button>
 
        

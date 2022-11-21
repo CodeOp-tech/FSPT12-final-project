@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import LoginA from "./components/LoginA";
@@ -18,12 +18,12 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="other">Other</Nav.Link>
-            <Nav.Link href="login">Login</Nav.Link>
-            <Nav.Link href="payment">Payment</Nav.Link>
-            <Nav.Link href="recipes">Recipe search</Nav.Link>
-            <Nav.Link href="saved_recipes">Saved recipes</Nav.Link>
-            <Nav.Link href="shopping">Shopping Cart</Nav.Link>
+            <Nav.Link as={NavLink} to="/other">Other</Nav.Link>
+            <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+            <Nav.Link as={NavLink} to="/payment">Payment</Nav.Link>
+            <Nav.Link as={NavLink} to="/recipes">Recipe search</Nav.Link>
+            <Nav.Link as={NavLink} to="/saved_recipes">Saved recipes</Nav.Link>
+            <Nav.Link as={NavLink} to="/shopping">Shopping Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
