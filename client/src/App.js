@@ -7,6 +7,7 @@ import PaymentA from "./components/PaymentA";
 import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
 import Other from "./components/Other";
+import Recipeinfo from "./components/Recipeinfo";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="payment" element={<PaymentA />} />
         <Route path="recipes" element={<RecipesA />} />
         <Route path="shopping" element={<ShoppingA />} />
+        <Route path="recipeinfo/:id" element={<Recipeinfo />} />
       </Routes>
     </div>
   );
