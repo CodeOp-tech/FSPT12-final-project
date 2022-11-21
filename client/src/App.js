@@ -8,6 +8,7 @@ import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
 import Other from "./components/Other";
 import Recipeinfo from "./components/Recipeinfo";
+import SavedRecipes from "./components/SavedRecipes";
 
 function App() {
   return (
@@ -21,16 +22,20 @@ function App() {
             <Nav.Link href="login">Login</Nav.Link>
             <Nav.Link href="payment">Payment</Nav.Link>
             <Nav.Link href="recipes">Recipe search</Nav.Link>
+            <Nav.Link href="saved_recipes">Saved recipes</Nav.Link>
             <Nav.Link href="shopping">Shopping Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+
+
       <Routes>
         <Route path="other" element={<Other />} />
         <Route path="login" element={<LoginA />} />
         <Route path="payment" element={<PaymentA />} />
         <Route path="recipes" element={<RecipesA />} />
         <Route path="shopping" element={<ShoppingA />} />
+        <Route path="saved_recipes" element={<SavedRecipes />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
       </Routes>
     </div>

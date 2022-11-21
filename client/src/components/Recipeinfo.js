@@ -28,6 +28,20 @@ export default function Recipeinfo() {
     setRecipeInfo(info);
   };
 
+  const addRecipe = () => {
+  // add the selected recipe to the saved_recipes table 
+  fetch("/saved_recipes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({'recipe_ID': id, 'user_id': 1, 'recipe_image':recipeInfo.image, 'recipe_title':recipeInfo.title, 'recipe_summary':recipeInfo.spoonacularSourceUrl})
+  })
+
+.then (res => res.json()) 
+alert("Recipe saved :)");
+ }
+
 //   const fetchRecipeIngredients = async () => {
 //     const response = await fetch(
 //       `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
@@ -56,7 +70,7 @@ export default function Recipeinfo() {
                 <p>Ready in: {recipeInfo.readyInMinutes} minutes</p>
                 <div>
                   <button>Add to cart</button>
-                  <button>Save recipe</button>
+                  <button onClick={addRecipe}>Save recipe</button>
                 </div>
               </div>
             </div>
