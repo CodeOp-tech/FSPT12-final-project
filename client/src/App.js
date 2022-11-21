@@ -8,9 +8,14 @@ import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
 import Other from "./components/Other";
 import Recipeinfo from "./components/Recipeinfo";
+import Signup from "./Signup";
+import { AuthProvider } from "./components/AuthContext";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
+    <AuthProvider>
     <div className="App">
       <Navbar className="bg-success" bg="success" expand="lg">
         Welcome to FSPT12 Recipe's App
@@ -18,6 +23,7 @@ function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="other">Other</Nav.Link>
+            <Nav.Link href="Signup">Signup</Nav.Link>
             <Nav.Link href="login">Login</Nav.Link>
             <Nav.Link href="payment">Payment</Nav.Link>
             <Nav.Link href="recipes">Recipe search</Nav.Link>
@@ -27,6 +33,7 @@ function App() {
       </Navbar>
       <Routes>
         <Route path="other" element={<Other />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="login" element={<LoginA />} />
         <Route path="payment" element={<PaymentA />} />
         <Route path="recipes" element={<RecipesA />} />
@@ -34,6 +41,7 @@ function App() {
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
       </Routes>
     </div>
+    </AuthProvider>
   );
 }
 
