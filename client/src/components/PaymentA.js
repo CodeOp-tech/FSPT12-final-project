@@ -15,7 +15,7 @@ export default function PaymentA() {
   });
 
   const  handleToken = async (token, addresses) => {
-    const response = await axios.post('http://localhost:5000/checkout', {token, order})
+    const response = await axios.post('http://localhost:5002/checkout', {token, order})
     
     //take the response and check for the status property
     console.log(response.status)
