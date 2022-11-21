@@ -5,10 +5,9 @@ import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
+import { Link } from 'react-router-dom'
 
 const animatedComponents = makeAnimated()
-
-const API_KEY = process.env.REACT_APP_API_KEY
 
 export default function RecipesA() {
   const [recipes, setRecipes] = useState([])
@@ -40,6 +39,7 @@ export default function RecipesA() {
   let dietAPI = diet.map((e) => e.value)
   let mealTypeAPI = mealType.map((e) => e.value)
 
+  console.log(process.env.REACT_APP_API_KEY)
   const getRecipes = async () => {
     const api = await fetch(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=6&addRecipeInformation=true`
@@ -162,6 +162,9 @@ export default function RecipesA() {
                   <Card.Header>{recipe.title}</Card.Header>
                   <Card.Img src={recipe.image} alt={recipe.title} />
                   <Button variant='primary'>Add recipe</Button>
+                  <Link to={`/recipeinfo/${recipe.id}`}>
+                    <Button>View Recipe</Button>
+                  </Link>
                 </Card>
               </SplideSlide>
             )
