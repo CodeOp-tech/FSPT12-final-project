@@ -31,6 +31,14 @@ router.get('/', async (req, res) => {
     await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title, recipe_summary) VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_summary}");`);
     
     res.send({message: "Recipe added successfully!"});
-   })  
+   });
+   
+   router.delete('/:recipeID', async(req,res) => {
+    console.log(req.params);
+    console.log("Recipe to be deleted is: ", req.params.recipeID);
+    await db(`DELETE FROM recipes_saved WHERE recipe_ID = ${req.params.recipeID} AND user_id = 1;`);
+    const recipes = await getRecipes();
+    res.send(recipes);
+   })
 
 module.exports = router;
