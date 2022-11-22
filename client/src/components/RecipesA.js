@@ -6,6 +6,7 @@ import makeAnimated from 'react-select/animated';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { Link } from "react-router-dom";
+import Recipeinfo from './Recipeinfo';
 
 const animatedComponents = makeAnimated();
 
@@ -15,7 +16,11 @@ export default function RecipesA() {
   const [diet, setDiet] = useState([]);
   const [intolerance, setIntolerance] = useState([]);
   const [mealType, setMeal] = useState([]);
-  const [userInput, setInput] = useState([]);  
+  const [userInput, setInput] = useState([]); 
+  const [addPane, setAddPane] = useState({ visible: false });
+  const [updatePane, setUpdatePane] = useState({ visible: false });
+
+ 
 
   // should we put into the DB table? 
   // https://spoonacular.com/food-api/docs#Diets
@@ -173,13 +178,18 @@ export default function RecipesA() {
     {recipes.map((recipe) => {
       return (
         <SplideSlide>      
-      <Card style={{"width":"10rem", "fontSize": "10"}}>
+      <Card style={{"width":"10rem", "fontSize": "10"}} key={recipe.id}>
        <Card.Header>{recipe.title}</Card.Header>
        <Card.Img src={recipe.image} alt={recipe.title} />
        {/* <Button variant="primary">Add recipe</Button> */}
-       <Link to={`/recipeinfo/${recipe.id}`}>
-       <Button>View Recipe</Button>
-       </Link>
+       {/* <Link to={`/recipeinfo/${recipe.id}`}> */}
+       <Button onClick={() => setAddPane({ visible: true })}>View recipe</Button>
+       <Recipeinfo 
+       visible={addPane.visible} 
+       closePane={()=> setAddPane({visible: false})}
+       id={recipe.id}
+       />
+       {/* </Link> */}
     </Card>      
     </SplideSlide> 
       )
