@@ -81,7 +81,7 @@ alert("Recipe saved :)");
           <Card.Body>
             <div className="col-md-8 d-flex flex-row">
               <div>
-                <img className="img-fluid" src={recipeInfo.image} />
+                <img className="img-fluid" src={recipeInfo.image} alt="recipe_image"/>
               </div>
               <div className="ms-4">
                 <h1>{recipeInfo.title}</h1>
@@ -120,7 +120,8 @@ alert("Recipe saved :)");
       </div>
 
       {/* INGREDIENTS & PRICE */}
-    </div>
+     
+      </div>
     </SlidingPane>
   );
 }
