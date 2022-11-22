@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
-export default function Recipeinfo() {
+export default function Recipeinfo({
+  visible,
+  closePane,
+  id 
+}
+
+) {
   const [recipeInfo, setRecipeInfo] = useState([]); //store the recipe info here
   const [recipeIngredients, setRecipeIngredients] = useState([]);
-  const { id } = useParams(); //get ID from clicked button (view recipe) in recipe search
+  //const { id } = useParams(); //get ID from clicked button (view recipe) in recipe search
+  const [updatePane, setUpdatePane] = useState({ visible: false });
 
 
   useEffect(() => {
@@ -17,6 +26,8 @@ export default function Recipeinfo() {
   }, []);
 
   const fetchRecipeInfo = async () => {
+
+    console.log("This is recipe id ", id);
     const response = await fetch(
       `${BASE_URL}/${id}/information?apiKey=${API_KEY}`,
       {
@@ -55,6 +66,14 @@ alert("Recipe saved :)");
 //   };
 
   return (
+    <SlidingPane
+    className="sliding-pane"
+    isOpen={visible}
+    title="Return to recipe research"
+    width={window.innerWidth < 600 ? "100%" : "600px"}
+    onRequestClose={closePane}
+  >
+
     <div>
       {/* IMG, QUICK FACTS */}
       <div className="container mt-4">
@@ -102,5 +121,6 @@ alert("Recipe saved :)");
 
       {/* INGREDIENTS & PRICE */}
     </div>
+    </SlidingPane>
   );
 }

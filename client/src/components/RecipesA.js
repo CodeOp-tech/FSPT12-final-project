@@ -5,7 +5,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { Link } from "react-router-dom";
+import Recipeinfo from './Recipeinfo';
 
 const animatedComponents = makeAnimated();
 
@@ -15,7 +15,10 @@ export default function RecipesA() {
   const [diet, setDiet] = useState([]);
   const [intolerance, setIntolerance] = useState([]);
   const [mealType, setMeal] = useState([]);
-  const [userInput, setInput] = useState([]);  
+  const [userInput, setInput] = useState([]); 
+  const [addPane, setAddPane] = useState({ visible: false });
+  const [recipeID, setRecipeId] = useState();
+ 
 
   // should we put into the DB table? 
   // https://spoonacular.com/food-api/docs#Diets
@@ -66,6 +69,11 @@ export default function RecipesA() {
   function handleSubmit(e) {
     e.preventDefault();
     getRecipes();    
+   }
+
+   function viewRecipe(id) {
+    setAddPane({ visible: true });
+    setRecipeId(id);
    }
 
   return (
@@ -172,19 +180,25 @@ export default function RecipesA() {
    >
     {recipes.map((recipe) => {
       return (
-        <SplideSlide>      
-      <Card style={{"width":"10rem", "fontSize": "10"}}>
+        <SplideSlide key={recipe.id}>      
+      <Card style={{"width":"10rem", "fontSize": "10"}} >
        <Card.Header>{recipe.title}</Card.Header>
        <Card.Img src={recipe.image} alt={recipe.title} />
        {/* <Button variant="primary">Add recipe</Button> */}
-       <Link to={`/recipeinfo/${recipe.id}`}>
-       <Button>View Recipe</Button>
-       </Link>
-    </Card>      
+       {/* <Link to={`/recipeinfo/${recipe.id}`}> */}
+       <Button onClick={() => viewRecipe(recipe.id)}>View recipe</Button>
+       </Card>      
     </SplideSlide> 
-      )
-    }
-    )}    
+      )})
+     }
+     {addPane.visible && 
+       <Recipeinfo 
+       visible={addPane.visible} 
+       closePane={()=> setAddPane({visible: false})}
+       id={recipeID}
+       />
+       }    
+        
     </Splide>   
    </div>
 
