@@ -22,7 +22,7 @@ export default function Recipeinfo({
 
   useEffect(() => {
     fetchRecipeInfo();
-    // fetchRecipeIngredients();
+    fetchRecipeIngredients();
   }, []);
 
   const fetchRecipeInfo = async () => {
@@ -117,9 +117,30 @@ alert("Recipe saved :)");
             </div>
           </Card.Body>
         </Card>
-      </div>
+      
 
       {/* INGREDIENTS & PRICE */}
+        <Card>
+          <Card.Body>
+            <div className="col-md-4 ms-4">
+                  <h3>Ingredients</h3>
+                  {recipeIngredients.ingredients && (
+                    <div>
+                        {recipeIngredients.ingredients.map((ingredients, index) => { return (
+                            <div key={index} className="d-flex justify-content-between">
+                            <p>{ingredients.name}</p>
+                            <p>{ingredients.price}</p>
+                            </div>
+                        )})}
+                        <p>Total cost per serving: {recipeIngredients.totalCostPerServing}</p>
+                        <p>Total cost per person: {recipeIngredients.totalCost}</p>
+                    </div>
+                  )}
+            </div>
+          </Card.Body>
+        </Card>
+        </div>
+      
     </div>
     </SlidingPane>
   );
