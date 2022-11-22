@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import IncrementIngredients from "./IncrementIngredients";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
@@ -9,11 +10,11 @@ export default function Recipeinfo() {
   const [recipeInfo, setRecipeInfo] = useState([]); //store the recipe info here
   const [recipeIngredients, setRecipeIngredients] = useState([]);
   const { id } = useParams(); //get ID from clicked button (view recipe) in recipe search
-
+  
 
   useEffect(() => {
     fetchRecipeInfo();
-    // fetchRecipeIngredients();
+    fetchRecipeIngredients();
   }, []);
 
   const fetchRecipeInfo = async () => {
@@ -28,17 +29,19 @@ export default function Recipeinfo() {
     setRecipeInfo(info);
   };
 
-//   const fetchRecipeIngredients = async () => {
-//     const response = await fetch(
-//       `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
-//       {
-//         method: "GET",
-//       }
-//     );
-//     const info = await response.json();
-//     console.log(info);
-//     setRecipeIngredients(info);
-//   };
+    const fetchRecipeIngredients = async () => {
+      const response = await fetch(
+        `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
+        {
+          method: "GET",
+        }
+      );
+      const ingredients = await response.json();
+      console.log(ingredients);
+      setRecipeIngredients(ingredients);
+    };
+
+
 
   return (
     <div>
@@ -84,9 +87,30 @@ export default function Recipeinfo() {
             </div>
           </Card.Body>
         </Card>
-      </div>
+      
 
       {/* INGREDIENTS & PRICE */}
+        <Card>
+          <Card.Body>
+            <div className="col-md-4 ms-4">
+                  <h3>Ingredients</h3>
+                  {recipeIngredients.ingredients && (
+                    <div>
+                        {recipeIngredients.ingredients.map((ingredients, index) => { return (
+                            <div key={index} className="d-flex justify-content-between">
+                            <p>{ingredients.name}</p>
+                            <p>{ingredients.price}</p>
+                            </div>
+                        )})}
+                        <p>Total cost per serving: {recipeIngredients.totalCostPerServing}</p>
+                        <p>Total cost per person: {recipeIngredients.totalCost}</p>
+                    </div>
+                  )}
+            </div>
+          </Card.Body>
+        </Card>
+        </div>
+      
     </div>
   );
 }
