@@ -53,17 +53,17 @@ export default function Recipeinfo({
 alert("Recipe saved :)");
  }
 
-//   const fetchRecipeIngredients = async () => {
-//     const response = await fetch(
-//       `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
-//       {
-//         method: "GET",
-//       }
-//     );
-//     const info = await response.json();
-//     console.log(info);
-//     setRecipeIngredients(info);
-//   };
+  const fetchRecipeIngredients = async () => {
+    const response = await fetch(
+      `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
+      {
+        method: "GET",
+      }
+    );
+    const info = await response.json();
+    console.log(info);
+    setRecipeIngredients(info);
+  };
 
   return (
     <SlidingPane
@@ -129,11 +129,11 @@ alert("Recipe saved :)");
                         {recipeIngredients.ingredients.map((ingredients, index) => { return (
                             <div key={index} className="d-flex justify-content-between">
                             <p>{ingredients.name}</p>
-                            <p>{ingredients.price}</p>
+                            <p>{ingredients.amount.us.value} {ingredients.amount.us.unit}</p>
                             </div>
                         )})}
-                        <p>Total cost per serving: {recipeIngredients.totalCostPerServing}</p>
-                        <p>Total cost per person: {recipeIngredients.totalCost}</p>
+                        <p>Total cost per serving: {recipeIngredients.totalCostPerServing/100} $</p>
+                        <p>Total cost per person: {recipeIngredients.totalCost/100} $</p>
                     </div>
                   )}
             </div>
