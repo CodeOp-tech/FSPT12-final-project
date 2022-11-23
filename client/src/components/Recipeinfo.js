@@ -53,17 +53,17 @@ export default function Recipeinfo({
 alert("Recipe saved :)");
  }
 
-//   const fetchRecipeIngredients = async () => {
-//     const response = await fetch(
-//       `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
-//       {
-//         method: "GET",
-//       }
-//     );
-//     const info = await response.json();
-//     console.log(info);
-//     setRecipeIngredients(info);
-//   };
+  const fetchRecipeIngredients = async () => {
+    const response = await fetch(
+      `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
+      {
+        method: "GET",
+      }
+    );
+    const info = await response.json();
+    console.log(info);
+    setRecipeIngredients(info);
+  };
 
   return (
     <SlidingPane
@@ -76,7 +76,7 @@ alert("Recipe saved :)");
 
     <div>
       {/* IMG, QUICK FACTS */}
-      <div className="container mt-4">
+      <div className="container-fluid mt-4">
         <Card>
           <Card.Body>
             <div className="col-md-8 d-flex flex-row">
