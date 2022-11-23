@@ -32,3 +32,5 @@ mdb-react-ui-kit
 react-icons
 bootstrap
 react-bootstrap
+react-router-dom
+cors
