@@ -26,9 +26,10 @@ router.get('/', async (req, res) => {
  // POST the recipe to be saved by the user 
  router.post('/', async(req,res) => {
     console.log(req.body);
-    let {recipe_ID, user_id, recipe_image, recipe_title, recipe_summary} = req.body;
+    let {recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes } = req.body;
    
-    await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title, recipe_summary) VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_summary}");`);
+    await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes)
+     VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_instructions}", "${recipe_pricePerServing}", "${recipe_readyInMinutes}" );`);
     
     res.send({message: "Recipe added successfully!"});
    });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Select from 'react-select';
@@ -6,6 +6,10 @@ import makeAnimated from 'react-select/animated';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Recipeinfo from './Recipeinfo';
+import { Context } from "../Context";
+
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = "https://api.spoonacular.com/recipes";
 
 const animatedComponents = makeAnimated();
 
@@ -18,7 +22,10 @@ export default function RecipesA() {
   const [userInput, setInput] = useState([]); 
   const [addPane, setAddPane] = useState({ visible: false });
   const [recipeID, setRecipeId] = useState();
- 
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
+
+  const {orderedRecipes, setOrderedRecipes} = useContext(Context);
+
 
   // should we put into the DB table? 
   // https://spoonacular.com/food-api/docs#Diets
@@ -57,8 +64,9 @@ export default function RecipesA() {
   let mealTypeAPI = mealType.map((e)=>e.value);
 
    const getRecipes = async() => {
-    const api = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=6&addRecipeInformation=true`);
+    const api = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=5&addRecipeInformation=true`);
     const data = await api.json();
+    console.log(data.results);
     setRecipes(data.results);    
   }
 
@@ -74,9 +82,70 @@ export default function RecipesA() {
    function viewRecipe(id) {
     setAddPane({ visible: true });
     setRecipeId(id);
+    fetchRecipeIngredients(id);
    }
 
-  return (
+     
+const fetchRecipeIngredients = async (id) => {
+  const response = await fetch(
+    `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
+    {
+      method: "GET",
+    }
+  );
+  const info = await response.json();
+  console.log(info);  
+  setRecipeIngredients(info);
+
+   }
+
+const addToCart = (recipeIngredients) => {
+    // 1. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
+    fetch("/ingredients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        'recipe_ID': recipeID, 
+        'ingredient_info': recipeIngredients      
+      })
+     
+    })
+  
+  .then (res => res.json()) 
+  alert("Recipe added to cart!");
+  // 2. Add recipe ID to the list of ordered recipes;
+  setOrderedRecipes(current => [...current, recipeID]);
+   }
+
+ 
+  
+const saveRecipe = (recipeInfo) => {
+      // add the selected recipe to the saved_recipes table 
+      fetch("/saved_recipes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          'recipe_ID': recipeInfo.id, 
+          'user_id': 1,
+          'recipe_image': recipeInfo.image, 
+          'recipe_title':recipeInfo.title, 
+          'recipe_instructions':recipeInfo.analyzedInstructions, 
+          'recipe_pricePerServing':recipeInfo.pricePerServing,
+          'recipe_readyInMinutes': recipeInfo.readyInMinutes
+        })
+       
+      })
+    
+    .then (res => res.json()) 
+    alert("Recipe saved :)");
+}
+
+
+   return (
     <div style={{"fontSize": "10"}}> Recipes search
 
      
@@ -187,6 +256,10 @@ export default function RecipesA() {
        {/* <Button variant="primary">Add recipe</Button> */}
        {/* <Link to={`/recipeinfo/${recipe.id}`}> */}
        <Button onClick={() => viewRecipe(recipe.id)}>View recipe</Button>
+       <Button onClick={() => addToCart(recipeIngredients)}>Add to cart</Button>
+       <Button onClick={() => saveRecipe(recipe)}>Save recipe</Button>
+
+
        </Card>      
     </SplideSlide> 
       )})
@@ -195,7 +268,10 @@ export default function RecipesA() {
        <Recipeinfo 
        visible={addPane.visible} 
        closePane={()=> setAddPane({visible: false})}
-       id={recipeID}
+       recipeInfo={recipes.find((rec) => rec.id===recipeID)}
+       addToCart={()=>addToCart(recipeID)}
+       saveRecipe={()=>saveRecipe(recipes.find((rec) => rec.id===recipeID))}
+       recipeIngredients={recipeIngredients}
        />
        }    
         
