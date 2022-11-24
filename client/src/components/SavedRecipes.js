@@ -66,26 +66,6 @@ const fetchRecipeIngredients = async (id) => {
    } 
 
     const addToCart = (id) => {
-     // 1. Fetch ingredients from API for the recipe selected
-      fetchRecipeIngredients(id);
-
-      // 2. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
-      
-      fetch("/ingredients", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          'recipe_ID': id, 
-          'ingredient_info': recipeIngredients      
-        })
-       
-      })
-    
-    .then (res => res.json()) 
-    alert("Recipe added to cart!");
-    // 3. Add recipe ID to the list of ordered recipes;
     
     setOrderedRecipes(current => [...current, id]);
 
@@ -96,7 +76,7 @@ const fetchRecipeIngredients = async (id) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          'recipe_orderStatus': true, 
+          'recipe_orderStatus': 1, 
         }) 
       })
       .then (res => res.json()) 

@@ -64,7 +64,7 @@ export default function RecipesA() {
   let mealTypeAPI = mealType.map((e)=>e.value);
 
    const getRecipes = async() => {
-    const api = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=5&addRecipeInformation=true`);
+    const api = await fetch(`${BASE_URL}/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=5&addRecipeInformation=true`);
     const data = await api.json();
     console.log(data.results);
     setRecipes(data.results);    
@@ -111,7 +111,6 @@ const saveRecipe = (recipeInfo) => {
           'user_id': 1,
           'recipe_image': recipeInfo.image, 
           'recipe_title':recipeInfo.title, 
-          'recipe_instructions':recipeInfo.analyzedInstructions, 
           'recipe_pricePerServing':recipeInfo.pricePerServing,
           'recipe_readyInMinutes': recipeInfo.readyInMinutes
         })
@@ -123,24 +122,8 @@ const saveRecipe = (recipeInfo) => {
 }
 
 const addToCart = (id) => {
-  fetchRecipeIngredients(id);
-  setRecipeId(id);
-  // 1. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
-  fetch("/ingredients", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      'recipe_ID': recipeID, 
-      'ingredient_info': recipeIngredients      
-    })
-   
-  })
-
-.then (res => res.json()) 
-// 2. Add recipe ID to the list of ordered recipes;
-
+  
+setRecipeId(id);  
 setOrderedRecipes(current => [...current, recipeID]);
 saveRecipe(recipes.find((rec) => rec.id===recipeID));
 // 3. In recipes_saved, put orderStatus to true
@@ -272,7 +255,7 @@ alert("Recipe added to cart!");
        {/* <Link to={`/recipeinfo/${recipe.id}`}> */}
        <Button onClick={() => viewRecipe(recipe.id)}>View recipe</Button>
        <Button onClick={() => addToCart(recipe.id)}>Add to cart</Button>
-       <Button onClick={() => saveRecipe(recipe)}>Save recipe</Button>
+       <Button onClick={() => saveRecipe(recipe)}>Save to favourites</Button>
 
 
        </Card>      

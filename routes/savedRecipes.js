@@ -28,8 +28,8 @@ router.get('/', async (req, res) => {
     console.log(req.body);
     let {recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes } = req.body;
    
-    await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes, recipe_orderStatus)
-     VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_instructions}", "${recipe_pricePerServing}", "${recipe_readyInMinutes}", "0" );`);
+    await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title,  recipe_pricePerServing, recipe_readyInMinutes, recipe_orderStatus)
+     VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_pricePerServing}", "${recipe_readyInMinutes}", "0" );`);
     
     res.send({message: "Recipe added successfully!"});
    });
