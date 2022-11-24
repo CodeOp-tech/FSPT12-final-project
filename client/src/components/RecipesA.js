@@ -119,10 +119,12 @@ const saveRecipe = (recipeInfo) => {
       })
     
     .then (res => res.json()) 
-    alert("Recipe saved :)");
+     alert("Recipe saved :)");
 }
 
-const addToCart = (recipeIngredients) => {
+const addToCart = (id) => {
+  fetchRecipeIngredients(id);
+  setRecipeId(id);
   // 1. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
   fetch("/ingredients", {
     method: "POST",
@@ -137,10 +139,24 @@ const addToCart = (recipeIngredients) => {
   })
 
 .then (res => res.json()) 
-alert("Recipe added to cart!");
 // 2. Add recipe ID to the list of ordered recipes;
 
 setOrderedRecipes(current => [...current, recipeID]);
+saveRecipe(recipes.find((rec) => rec.id===recipeID));
+// 3. In recipes_saved, put orderStatus to true
+fetch(`/saved_recipes/${recipeID}`, {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    'recipe_orderStatus': 1, 
+  }) 
+})
+.then (res => res.json()) 
+
+alert("Recipe added to cart!");
+
  }
 
 
@@ -255,7 +271,7 @@ setOrderedRecipes(current => [...current, recipeID]);
        {/* <Button variant="primary">Add recipe</Button> */}
        {/* <Link to={`/recipeinfo/${recipe.id}`}> */}
        <Button onClick={() => viewRecipe(recipe.id)}>View recipe</Button>
-       <Button onClick={() => addToCart(recipeIngredients)}>Add to cart</Button>
+       <Button onClick={() => addToCart(recipe.id)}>Add to cart</Button>
        <Button onClick={() => saveRecipe(recipe)}>Save recipe</Button>
 
 

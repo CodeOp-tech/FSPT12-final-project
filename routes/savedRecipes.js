@@ -28,11 +28,20 @@ router.get('/', async (req, res) => {
     console.log(req.body);
     let {recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes } = req.body;
    
-    await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes)
-     VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_instructions}", "${recipe_pricePerServing}", "${recipe_readyInMinutes}" );`);
+    await db(`INSERT INTO recipes_saved (recipe_ID, user_id, recipe_image, recipe_title, recipe_instructions, recipe_pricePerServing, recipe_readyInMinutes, recipe_orderStatus)
+     VALUES ("${recipe_ID}","${user_id}", "${recipe_image}", "${recipe_title}", "${recipe_instructions}", "${recipe_pricePerServing}", "${recipe_readyInMinutes}", "0" );`);
     
     res.send({message: "Recipe added successfully!"});
    });
+
+    
+   router.put('/:recipeID', async(req,res) => {
+    console.log(req.params);
+    console.log("Recipe to be updated is: ", req.params.recipeID);
+    await db(`UPDATE recipes_saved SET recipe_orderStatus = '1' WHERE recipe_ID = "${req.params.recipeID}" and user_id=1;`);
+    const recipes = await getRecipes();
+    res.send(recipes);
+   })
    
    router.delete('/:recipeID', async(req,res) => {
     console.log(req.params);

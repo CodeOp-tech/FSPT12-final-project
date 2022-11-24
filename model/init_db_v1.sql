@@ -16,13 +16,15 @@ DROP TABLE IF EXISTS recipes_saved;
 
 CREATE TABLE `recipes_saved`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `recipe_ID` INT NOT NULL,
+    `recipe_ID` INT NOT NULL,    
     `user_id` INT NOT NULL,
     `recipe_image` LONGTEXT NOT NULL,
     `recipe_title` LONGTEXT NOT NULL,
     `recipe_instructions` LONGTEXT NOT NULL,
     `recipe_pricePerServing` DECIMAL(8,2) NOT NULL,
     `recipe_readyInMinutes` DECIMAL(8,2) NOT NULL,
+    `recipe_orderStatus` BOOLEAN NOT NULL,
+
     PRIMARY KEY(id)
 );
 

@@ -14,6 +14,7 @@ export default function SavedRecipes() {
     const {orderedRecipes, setOrderedRecipes} = useContext(Context);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
 
+    console.log(orderedRecipes);
 
     useEffect(() => {
      getRecipes();
@@ -87,6 +88,20 @@ const fetchRecipeIngredients = async (id) => {
     // 3. Add recipe ID to the list of ordered recipes;
     
     setOrderedRecipes(current => [...current, id]);
+
+    // 4. In recipes_saved, put orderStatus to true
+      fetch(`/saved_recipes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          'recipe_orderStatus': true, 
+        }) 
+      })
+      .then (res => res.json()) 
+
+      alert("Recipe added to cart!");
      }
 
      
