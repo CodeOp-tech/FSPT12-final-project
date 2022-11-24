@@ -7,6 +7,7 @@ var cors = require("cors");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var savedRecipeRouter = require('./routes/savedRecipes');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/saved_recipes', savedRecipeRouter);
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {

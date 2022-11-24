@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Register from "./components/Register";
@@ -14,6 +14,9 @@ import Home from "./components/Home";
 //import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./components/Profile";
+import OrdersDashA from "./components/OrdersDashA";
+import SavedRecipes from "./components/SavedRecipes";
 
 function App() {
   return (
@@ -25,14 +28,17 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="other">Other</Nav.Link>
-            <Nav.Link href="login">Login</Nav.Link>
-            <Nav.Link href="payment">Payment</Nav.Link>
-            <Nav.Link href="recipes">Recipe search</Nav.Link>
-            <Nav.Link href="shopping">Shopping Cart</Nav.Link>
+            <Nav.Link as={NavLink} to="/other">Other</Nav.Link>
+            <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+            <Nav.Link as={NavLink} to="/payment">Payment</Nav.Link>
+            <Nav.Link as={NavLink} to="/recipes">Recipe search</Nav.Link>
+            <Nav.Link as={NavLink} to="/saved_recipes">Saved recipes</Nav.Link>
+            <Nav.Link as={NavLink} to="/shopping">Shopping Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+
+
       <Routes>
         <Route path="other" element={<Other />} />
         <Route path="register" element={<Register />} />
@@ -46,7 +52,10 @@ function App() {
         <Route path="payment" element={<PaymentA />} />
         <Route path="recipes" element={<RecipesA />} />
         <Route path="shopping" element={<ShoppingA />} />
+        <Route path="saved_recipes" element={<SavedRecipes />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="ordersdash" element={<OrdersDashA />} />
       </Routes>
     </div>
 {/*     </BrowserRouter> */}
