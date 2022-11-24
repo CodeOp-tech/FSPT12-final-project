@@ -8,6 +8,8 @@ import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
 import Other from "./components/Other";
 import Recipeinfo from "./components/Recipeinfo";
+import Profile from "./components/Profile";
+import OrdersDashA from "./components/OrdersDashA";
 import SavedRecipes from "./components/SavedRecipes";
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
         <Route path="shopping" element={<ShoppingA />} />
         <Route path="saved_recipes" element={<SavedRecipes />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="ordersdash" element={<OrdersDashA />} />
       </Routes>
     </div>
   );
