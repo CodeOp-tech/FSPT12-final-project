@@ -1,6 +1,8 @@
 /* import React from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
+
+
 export default function EditButton() {
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: '#9de2ff' }}>
@@ -39,11 +41,11 @@ export default function EditButton() {
                 </div>
                 <MDBRow>
                   <MDBCol className="mb-2">
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
+                    <MDBCardImage src={recipe_image}
                       alt="image 1" className="w-100 rounded-3" />
                   </MDBCol>
                   <MDBCol className="mb-2">
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+                    <MDBCardImage src={recipe_image}
                       alt="image 1" className="w-100 rounded-3" />
                   </MDBCol>
                 </MDBRow>
@@ -72,4 +74,4 @@ export default function EditButton() {
       </MDBContainer>
     </div>
   );
-} */
+}  */

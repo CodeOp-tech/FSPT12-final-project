@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Register from "./components/Register";
@@ -10,14 +10,15 @@ import ShoppingA from "./components/ShoppingA";
 import Other from "./components/Other";
 import Recipeinfo from "./components/Recipeinfo";
 import Admin from "./components/Admin";
-import { BrowserRouter } from "react-router-dom";
+import Home from "./components/Home";
+//import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <AuthProvider>
-    <BrowserRouter>
+{/*     <BrowserRouter> */}
     <div className="App">
       <Navbar className="bg-success" bg="success" expand="lg">
         Welcome to FSPT12 Recipe's App
@@ -48,7 +49,7 @@ function App() {
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
       </Routes>
     </div>
-    </BrowserRouter>
+{/*     </BrowserRouter> */}
     </AuthProvider>
   );
 }

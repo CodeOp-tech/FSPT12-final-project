@@ -29,12 +29,12 @@ router.post("/register", async (req, res) => {
 
 //login the user
 router.post("/login", async (req, res) => {
+  console.log("from backend", req.body);
   const { email, password } = req.body;
   try {
     //check if the user exists
     //user is the object I receive after I select everything with the email that is coming from the body of the request
     const results = await db(`SELECT * FROM users WHERE email = '${email}';`);
-    console.log(results);
     const user = results.data[0];
     if (user) {
       const user_id = user.id;
@@ -42,12 +42,14 @@ router.post("/login", async (req, res) => {
       //comparing password that's been given, and the password that's stored. Will give a boolean
       const correctPassword = await bcrypt.compare(password, user.password);
       //if password is not correct, send error
-      if (!correctPassword) throw new Error("Incorrect password")
+      if (!correctPassword) throw new Error("Incorrect password");
 
       //if the password is correct, send token with user id inside
       //user the underscore here instead of dot because then it would import
       const token = jwt.sign({ user_id }, supersecret)
-      res.send({message: "Login successful, here is your token", token})
+      res.send({message: "Login successful, here is your token", token});
+    } else {
+      throw new Error("User not found");
     }
   } catch (err) {
   res.status(400).send({ message: err.message });
@@ -57,6 +59,8 @@ router.post("/login", async (req, res) => {
 //get the protected data
 router.get("/profile", userShouldBeLoggedIn, async(req, res) => {
  const user = await db(`SELECT * FROM  users WHERE id = ${req.user_id}`);
+ res.send(user.data);
+ console.log(user);
 });
 
 

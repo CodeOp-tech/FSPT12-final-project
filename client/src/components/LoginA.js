@@ -32,7 +32,7 @@ function Login() {
   };
 
    const signInWasOk = () => {
-    navigate("/dashboard");
+    navigate("/home");
     new Noty({
       type: "success",
       text: "Welcome to your private area",
@@ -112,11 +112,11 @@ function Login() {
           Log out
         </button>
       </div>
-      <div className="text-center p-4">
+{/*       <div className="text-center p-4">
         <button className=" btn btn-outline-primary" onClick={requestData}>
           Request protected data
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

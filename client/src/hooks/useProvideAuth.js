@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import axios from "axios";
 
 //useProvideAuth is a custom hook that when you use it you can access the login state, the signin, and signout
 //have my context, I use my context, I am providing this useProvideAuth, which is the data I'd like to be able to share with all the components, globally shared data, 
@@ -11,6 +12,7 @@ export default function useProvideAuth() {
   
     //receiving a user object and a callback function (cb)
     const signin = async (user, cb) => {
+        console.log('from signin function', user);
       try {
         const { data } = await axios("/users/login", {
           method: "POST",
@@ -22,7 +24,7 @@ export default function useProvideAuth() {
         //save the token in local storage when the user logs in
         localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
-        //   cb();
+          cb();
       } catch (err) {
         //   console.log(err.response);
         throw err.response.data.message;

@@ -13,3 +13,14 @@ export default function Home() {
     </div>
   )
 } */
+
+import React from "react";
+
+export default function Home() {
+  return (
+    <div>
+      Home
+      <h1>this is very private</h1>
+    </div>
+  );
+}
