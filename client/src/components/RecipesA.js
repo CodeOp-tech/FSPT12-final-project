@@ -97,29 +97,7 @@ const fetchRecipeIngredients = async (id) => {
   console.log(info);  
   setRecipeIngredients(info);
 
-   }
-
-const addToCart = (recipeIngredients) => {
-    // 1. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
-    fetch("/ingredients", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        'recipe_ID': recipeID, 
-        'ingredient_info': recipeIngredients      
-      })
-     
-    })
-  
-  .then (res => res.json()) 
-  alert("Recipe added to cart!");
-  // 2. Add recipe ID to the list of ordered recipes;
-  setOrderedRecipes(current => [...current, recipeID]);
-   }
-
- 
+   } 
   
 const saveRecipe = (recipeInfo) => {
       // add the selected recipe to the saved_recipes table 
@@ -143,6 +121,27 @@ const saveRecipe = (recipeInfo) => {
     .then (res => res.json()) 
     alert("Recipe saved :)");
 }
+
+const addToCart = (recipeIngredients) => {
+  // 1. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
+  fetch("/ingredients", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      'recipe_ID': recipeID, 
+      'ingredient_info': recipeIngredients      
+    })
+   
+  })
+
+.then (res => res.json()) 
+alert("Recipe added to cart!");
+// 2. Add recipe ID to the list of ordered recipes;
+
+setOrderedRecipes(current => [...current, recipeID]);
+ }
 
 
    return (

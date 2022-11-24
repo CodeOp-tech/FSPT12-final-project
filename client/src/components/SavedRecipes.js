@@ -5,11 +5,14 @@ import {Card, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../Context";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = "https://api.spoonacular.com/recipes";
 
 export default function SavedRecipes() {
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState([{recipe_image: "", recipe_title: "", recipe_summary: ""}]);
     const {orderedRecipes, setOrderedRecipes} = useContext(Context);
+    const [recipeIngredients, setRecipeIngredients] = useState([]);
 
 
     useEffect(() => {
@@ -46,6 +49,47 @@ export default function SavedRecipes() {
       navigate('/cartN');
 
     }
+// this is a copy from RecipesA.js , I have to think how to re-use it here
+
+const fetchRecipeIngredients = async (id) => {
+  const response = await fetch(
+    `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
+    {
+      method: "GET",
+    }
+  );
+  const info = await response.json();
+  console.log(info);  
+  setRecipeIngredients(info);
+
+   } 
+
+    const addToCart = (id) => {
+     // 1. Fetch ingredients from API for the recipe selected
+      fetchRecipeIngredients(id);
+
+      // 2. Store recipe's ingredients, amount and prices when the user adds the recipe to cart, for later order cost calculation
+      
+      fetch("/ingredients", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          'recipe_ID': id, 
+          'ingredient_info': recipeIngredients      
+        })
+       
+      })
+    
+    .then (res => res.json()) 
+    alert("Recipe added to cart!");
+    // 3. Add recipe ID to the list of ordered recipes;
+    
+    setOrderedRecipes(current => [...current, id]);
+     }
+
+     
  
   return (
     <div>Here are your saved recipes
@@ -69,7 +113,7 @@ export default function SavedRecipes() {
 
        <Button onClick={navigateToCart}>View cart</Button>       
        :
-       <Button onClick={() => setOrderedRecipes(recipe.recipe_ID)}>Add to cart</Button>       
+       <Button onClick={()=>addToCart(recipe.recipe_ID)}>Add to cart</Button>       
     }
        <Button onClick={() => deleteRecipe(recipe.recipe_ID)}>Delete recipe</Button>
   

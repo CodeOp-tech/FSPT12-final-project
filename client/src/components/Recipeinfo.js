@@ -1,12 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
-//import { useParams } from "react-router-dom";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-import { Context } from "../Context";
-
-// const API_KEY = process.env.REACT_APP_API_KEY;
-// const BASE_URL = "https://api.spoonacular.com/recipes";
 
 export default function Recipeinfo({
   visible,
@@ -18,8 +13,6 @@ export default function Recipeinfo({
 }) 
 
 {
-  const {orderedRecipes, setOrderedRecipes} = useContext(Context);
-
 
   return (
     <SlidingPane
