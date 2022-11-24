@@ -8,6 +8,9 @@ import RecipesA from "./components/RecipesA";
 import ShoppingA from "./components/ShoppingA";
 import Other from "./components/Other";
 import Recipeinfo from "./components/Recipeinfo";
+import Profile from "./components/Profile";
+import OrdersDashA from "./components/OrdersDashA";
+
 
 function App() {
   return (
@@ -32,6 +35,8 @@ function App() {
         <Route path="recipes" element={<RecipesA />} />
         <Route path="shopping" element={<ShoppingA />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="ordersdash" element={<OrdersDashA />} />
       </Routes>
     </div>
   );
