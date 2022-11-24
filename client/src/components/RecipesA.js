@@ -9,7 +9,12 @@ import Recipeinfo from "./Recipeinfo";
 
 const animatedComponents = makeAnimated();
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 export default function RecipesA() {
+
+  console.log(API_KEY);
+
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState([]);
   const [intolerance, setIntolerance] = useState([]);
