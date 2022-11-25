@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import "./Ingredient.css"
+import React, {useEffect, useState} from 'react'
+import "./Ingredient.css";
 
  
 const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
@@ -12,6 +12,8 @@ export default function Ingredient({ingredients}) {
   );
 
   const [total, setTotal] = useState(0);
+  const [totalOrder, setTotalOrder] = useState();
+  
 
   const handleOnChange = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
@@ -31,11 +33,8 @@ export default function Ingredient({ingredients}) {
     );
 
     setTotal(totalPrice);
-  };
-
-  const addToOrder = () => {
-
-  }
+  };   
+  
 
   return (
     <div className="App">
@@ -57,17 +56,18 @@ export default function Ingredient({ingredients}) {
                   <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
                 </div>
                 <div className="right-section">{getFormattedPrice(price/100)}</div>
+                
               </div>
             </li>
           );
         })}
         <li>
           <div className="toppings-list-item">
-            <div className="left-section">Total:</div>
-            <div className="right-section">{getFormattedPrice(total)}</div>
-            <button onClick={addToOrder}>Add to order</button>
+            <div className="left-section">Total price of the recipe:</div>
+            <div className="right-section" id="price">{getFormattedPrice(total)}</div>
 
-          </div>
+           </div>          
+         
         </li>
       </ul>
     </div>
