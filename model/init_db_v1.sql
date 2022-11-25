@@ -28,7 +28,7 @@ CREATE TABLE `recipes_saved`(
     PRIMARY KEY(id)
 );
 
--- DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS ingredients;
 
 -- CREATE TABLE `ingredients`(
 --     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,

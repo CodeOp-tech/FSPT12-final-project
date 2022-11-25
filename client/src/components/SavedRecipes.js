@@ -5,14 +5,11 @@ import {Card, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../Context";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = "https://api.spoonacular.com/recipes";
 
 export default function SavedRecipes() {
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState([{recipe_image: "", recipe_title: "", recipe_summary: ""}]);
     const {orderedRecipes, setOrderedRecipes} = useContext(Context);
-    const [recipeIngredients, setRecipeIngredients] = useState([]);
 
     console.log(orderedRecipes);
 
@@ -50,20 +47,6 @@ export default function SavedRecipes() {
       navigate('/cartN');
 
     }
-// this is a copy from RecipesA.js , I have to think how to re-use it here
-
-const fetchRecipeIngredients = async (id) => {
-  const response = await fetch(
-    `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
-    {
-      method: "GET",
-    }
-  );
-  const info = await response.json();
-  console.log(info);  
-  setRecipeIngredients(info);
-
-   } 
 
     const addToCart = (id) => {
     
