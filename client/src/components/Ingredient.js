@@ -1,18 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import "./Ingredient.css";
 
- 
+// Adapted from here:
+ // https://codesandbox.io/s/wild-silence-b8k2j?file=/src/App.js
+
 const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
-export default function Ingredient({ingredients}) {
+export default function Ingredient({ingredients, servings}) {
   
-  
+    const [serving, setServings] = useState(servings);
+
     const [checkedState, setCheckedState] = useState(
     new Array(ingredients.length).fill(false)
   );
 
   const [total, setTotal] = useState(0);
-  const [totalOrder, setTotalOrder] = useState();
   
 
   const handleOnChange = (position) => {
@@ -25,7 +27,7 @@ export default function Ingredient({ingredients}) {
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
         if (currentState === true) {
-          return sum + ingredients[index].price/100;
+          return sum + ingredients[index].price*(serving/servings)/100;
         }
         return sum;
       },
@@ -33,14 +35,22 @@ export default function Ingredient({ingredients}) {
     );
 
     setTotal(totalPrice);
-  };   
+  };  
   
-
+  function handleServings(e) {
+    setServings(e.target.value);
+  }
+  
+// , amount.us.value, amount.us.unit 
   return (
     <div className="App">
-      <h3>Select ingredients</h3>
+    <div className="toppings-list-item">
+      <h4 className="left-section">Select ingredients</h4>
+      <input type="text" onChange={(e)=>handleServings(e)} value={serving} />
+      <h4 className="right-section">Servings {serving}</h4>
+      </div>
       <ul className="toppings-list">
-        {ingredients.map(({ name, price }, index) => {
+        {ingredients.map(({ name, price}, index) => {
           return (
             <li key={index}>
               <div className="toppings-list-item">
@@ -55,7 +65,7 @@ export default function Ingredient({ingredients}) {
                   />
                   <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
                 </div>
-                <div className="right-section">{getFormattedPrice(price/100)}</div>
+                <div className="right-section">{getFormattedPrice((price*serving/servings)/100)}</div>
                 
               </div>
             </li>

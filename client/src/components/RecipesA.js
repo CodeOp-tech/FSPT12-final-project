@@ -110,7 +110,8 @@ const saveRecipe = (recipeInfo) => {
           'recipe_ID': recipeInfo.id, 
           'user_id': 1,
           'recipe_image': recipeInfo.image, 
-          'recipe_title':recipeInfo.title, 
+          'recipe_title':recipeInfo.title,
+          'recipe_servings': recipeInfo.servings, 
           'recipe_pricePerServing':recipeInfo.pricePerServing,
           'recipe_readyInMinutes': recipeInfo.readyInMinutes
         })

@@ -79,7 +79,7 @@ export default function CartNadia() {
           {(clickedID===recipe.recipe_ID) && (
             
             <>
-            <Ingredient ingredients={ingredients} />
+            <Ingredient ingredients={ingredients} servings={recipe.recipe_servings} />
             <button onClick={addToOrder}>Add to order</button>
             </>
           )}

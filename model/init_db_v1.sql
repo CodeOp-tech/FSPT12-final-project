@@ -20,6 +20,7 @@ CREATE TABLE `recipes_saved`(
     `user_id` INT NOT NULL,
     `recipe_image` LONGTEXT NOT NULL,
     `recipe_title` LONGTEXT NOT NULL,
+    `recipe_servings` INT NOT NULL,
     `recipe_pricePerServing` DECIMAL(8,2) NOT NULL,
     `recipe_readyInMinutes` DECIMAL(8,2) NOT NULL,
     `recipe_orderStatus` BOOLEAN NOT NULL,
