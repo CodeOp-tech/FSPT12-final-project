@@ -1,5 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import "./Ingredient.css";
+import { Context } from "../Context";
+
 
 // Adapted from here:
  // https://codesandbox.io/s/wild-silence-b8k2j?file=/src/App.js
@@ -15,14 +17,24 @@ export default function Ingredient({ingredients, servings}) {
   );
 
   const [total, setTotal] = useState(0);
-  
+  const {orderedIngredients, setOrderedIngredients} = useContext(Context);
 
+
+  
   const handleOnChange = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
+
+    if (updatedCheckedState[position]) {
+     setOrderedIngredients([...orderedIngredients, ingredients[position]]);
+    console.log("Ingredient ordered is: ", ingredients[position]);
+    } else { 
+      console.log("Remove this ingredient from the array by some unique id");
+
+  }
 
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
@@ -41,7 +53,6 @@ export default function Ingredient({ingredients, servings}) {
     setServings(e.target.value);
   }
   
-// , amount.us.value, amount.us.unit 
   return (
     <div className="App">
     <div className="toppings-list-item">

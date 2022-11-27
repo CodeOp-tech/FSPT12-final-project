@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Select from 'react-select';
@@ -6,14 +6,12 @@ import makeAnimated from 'react-select/animated';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Recipeinfo from './Recipeinfo';
-import { Context } from "../Context";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
 const animatedComponents = makeAnimated();
 
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function RecipesA() {
 
@@ -27,8 +25,6 @@ export default function RecipesA() {
   const [addPane, setAddPane] = useState({ visible: false });
   const [recipeID, setRecipeId] = useState();
   const [recipeIngredients, setRecipeIngredients] = useState([]);
-
-  const {orderedRecipes, setOrderedRecipes} = useContext(Context);
 
 
   // should we put into the DB table? 
@@ -129,7 +125,7 @@ const saveRecipe = (recipeInfo) => {
 const addToCart = (id) => {
   
 setRecipeId(id);  
-setOrderedRecipes(current => [...current, recipeID]);
+//setOrderedRecipes(current => [...current, recipeID]);
 saveRecipe(recipes.find((rec) => rec.id===recipeID));
 // 3. In recipes_saved, put orderStatus to true
 fetch(`/saved_recipes/${recipeID}`, {
