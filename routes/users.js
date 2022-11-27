@@ -43,11 +43,12 @@ router.post("/login", async (req, res) => {
       const correctPassword = await bcrypt.compare(password, user.password);
       //if password is not correct, send error
       if (!correctPassword) throw new Error("Incorrect password");
+      const isAdmin = (email === 'admin@admin.com') ? true : false
 
       //if the password is correct, send token with user id inside
       //user the underscore here instead of dot because then it would import
       const token = jwt.sign({ user_id }, supersecret)
-      res.send({message: "Login successful, here is your token", token});
+      res.send({message: "Login successful, here is your token", token, isAdmin});
     } else {
       throw new Error("User not found");
     }

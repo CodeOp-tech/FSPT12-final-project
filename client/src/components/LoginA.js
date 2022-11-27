@@ -32,15 +32,16 @@ function Login() {
   };
 
    const signInWasOk = () => {
-    navigate("/home");
+    console.log("signin was ok")
     new Noty({
       type: "success",
-      text: "Welcome to your private area",
+      text: "Welcome to Recipe Haul!",
       timeout: 2000,
     }).show();
   };
 
   const signInWasNotOk = (message) => {
+    console.log("signin was not ok")
     new Noty({
       type: "error",
       text: message,

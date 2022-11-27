@@ -41,18 +41,15 @@ export default function EditButton() {
                 </div>
                 <MDBRow>
                   <MDBCol className="mb-2">
-                    <MDBCardImage src={recipe_image}
+                    <MDBCardImage src={recipes_saved.recipe_image}
                       alt="image 1" className="w-100 rounded-3" />
+                      <h5>{recipes_saved.recipe_image}</h5>
                   </MDBCol>
                   <MDBCol className="mb-2">
                     <MDBCardImage src={recipe_image}
                       alt="image 1" className="w-100 rounded-3" />
                   </MDBCol>
                 </MDBRow>
-                <div className="d-flex justify-content-between align-items-center mb-4">
-                  <MDBCardText className="lead fw-normal mb-0">Saved Recipes</MDBCardText>
-                  <MDBCardText className="mb-0"><a href="#!" className="text-muted">Show all</a></MDBCardText>
-                </div>
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <MDBCardText className="lead fw-normal mb-0">Order History</MDBCardText>
                   <MDBCardText className="mb-0"><a href="#!" className="text-muted">Show all</a></MDBCardText>

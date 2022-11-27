@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 //useProvideAuth is a custom hook that when you use it you can access the login state, the signin, and signout
 //have my context, I use my context, I am providing this useProvideAuth, which is the data I'd like to be able to share with all the components, globally shared data, 
@@ -9,6 +11,7 @@ import axios from "axios";
 // "!!" converts an object to boolean, this prevents against the object being translated into "null", so much easier to read, w/o this, no one will be aware of it
 export default function useProvideAuth() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+    const navigate = useNavigate();
   
     //receiving a user object and a callback function (cb)
     const signin = async (user, cb) => {
@@ -24,9 +27,15 @@ export default function useProvideAuth() {
         //save the token in local storage when the user logs in
         localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
-          cb();
+        if (data.isAdmin) {
+          navigate("/ordersdash")
+          console.log(data.isAdmin);
+        } else {
+          navigate("/profile")
+        }
+
       } catch (err) {
-        //   console.log(err.response);
+          console.log(err);
         throw err.response.data.message;
       }
     };

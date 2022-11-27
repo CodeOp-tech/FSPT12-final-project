@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import OrdersDashA from "./components/OrdersDashA";
 import SavedRecipes from "./components/SavedRecipes";
+import OrdersHistory from "./components/OrdersHistory";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path="saved_recipes" element={<SavedRecipes />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="orders_history" element={<OrdersHistory />} />
         <Route path="ordersdash" element={<OrdersDashA />} />
       </Routes>
     </div>
