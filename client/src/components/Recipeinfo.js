@@ -1,69 +1,18 @@
-import React, { useEffect, useState } from "react";
-//import { useParams } from "react-router-dom";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = "https://api.spoonacular.com/recipes";
-
 export default function Recipeinfo({
   visible,
   closePane,
-  id 
-}
+  recipeInfo,
+  addToCart,
+  saveRecipe,
+  recipeIngredients  
+}) 
 
-) {
-  const [recipeInfo, setRecipeInfo] = useState([]); //store the recipe info here
-  const [recipeIngredients, setRecipeIngredients] = useState([]);
-  //const { id } = useParams(); //get ID from clicked button (view recipe) in recipe search
-  const [updatePane, setUpdatePane] = useState({ visible: false });
-
-
-  useEffect(() => {
-    fetchRecipeInfo();
-    fetchRecipeIngredients();
-  }, []);
-
-  const fetchRecipeInfo = async () => {
-
-    console.log("This is recipe id ", id);
-    const response = await fetch(
-      `${BASE_URL}/${id}/information?apiKey=${API_KEY}`,
-      {
-        method: "GET",
-      }
-    );
-    const info = await response.json();
-    console.log(info);
-    setRecipeInfo(info);
-  };
-
-  const addRecipe = () => {
-  // add the selected recipe to the saved_recipes table 
-  fetch("/saved_recipes", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({'recipe_ID': id, 'user_id': 1, 'recipe_image':recipeInfo.image, 'recipe_title':recipeInfo.title, 'recipe_summary':recipeInfo.spoonacularSourceUrl})
-  })
-
-.then (res => res.json()) 
-alert("Recipe saved :)");
- }
-
-  const fetchRecipeIngredients = async () => {
-    const response = await fetch(
-      `${BASE_URL}/${id}/priceBreakdownWidget.json?apiKey=${API_KEY}`,
-      {
-        method: "GET",
-      }
-    );
-    const info = await response.json();
-    console.log(info);
-    setRecipeIngredients(info);
-  };
+{
 
   return (
     <SlidingPane
@@ -88,7 +37,7 @@ alert("Recipe saved :)");
                 <p><strong>Price per serving: € {recipeInfo.pricePerServing}</strong></p>
                 <p><strong>Ready in: {recipeInfo.readyInMinutes} minutes</strong></p>
                 <div className="d-flex w-100">
-                  <button className="btn btn-success">Add to cart</button>
+                  <button className="btn btn-success" onClick={addToCart}>Add to cart</button>
                   <button className="btn btn-success ms-1" onClick={addRecipe}>Save recipe</button>
                 </div>
               </div>
@@ -131,13 +80,13 @@ alert("Recipe saved :)");
                         {recipeIngredients.ingredients.map((ingredients, index) => { return (
                             <div key={index} className="d-flex justify-content-between">
                             <p>{ingredients.name}</p>
-                            <p>{ingredients.price}</p>
+                            <p>{ingredients.amount.us.value} {ingredients.amount.us.unit}</p>
                             </div>
                         )})}
                         <hr/>
                         <div className="d-flex flex-wrap">
-                        <p className="w-100">Total cost per serving: {recipeIngredients.totalCostPerServing}</p>
-                        <p className="w-100">Total cost per person: {recipeIngredients.totalCost}</p>
+                        <p className="w-100">Total cost per serving: {recipeIngredients.totalCostPerServing/100} $</p>
+                        <p className="w-100">Total cost per person: {recipeIngredients.totalCost/100} $</p>
                         </div>
                     </div>
                   )}

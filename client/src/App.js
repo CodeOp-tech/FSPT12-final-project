@@ -11,6 +11,7 @@ import Recipeinfo from "./components/Recipeinfo";
 import Profile from "./components/Profile";
 import OrdersDashA from "./components/OrdersDashA";
 import SavedRecipes from "./components/SavedRecipes";
+import CartNadia from "./components/CartNadia";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Nav.Link as={NavLink} to="/recipes">Recipe search</Nav.Link>
             <Nav.Link as={NavLink} to="/saved_recipes">Saved recipes</Nav.Link>
             <Nav.Link as={NavLink} to="/shopping">Shopping Cart</Nav.Link>
+            <Nav.Link as={NavLink} to="/cartN">Nadia Cart</Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -38,6 +41,7 @@ function App() {
         <Route path="recipes" element={<RecipesA />} />
         <Route path="shopping" element={<ShoppingA />} />
         <Route path="saved_recipes" element={<SavedRecipes />} />
+        <Route path="cartN" element={<CartNadia />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
         <Route path="profile" element={<Profile />} />
         <Route path="ordersdash" element={<OrdersDashA />} />
