@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Card, Button} from 'react-bootstrap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Ingredient from './Ingredient';
+import { Context } from "../Context";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
@@ -15,12 +16,13 @@ export default function CartNadia() {
     const [recipes, setRecipes] = useState([]);
     const [clickedID, setID] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
-    
+    const {orderedIngredients, setOrderedIngredients} = useContext(Context);
+
     useEffect(() => {
       getRecipes();
      }, []);
 
-
+console.log("Cart ordered ingredients: ", orderedIngredients);
     const getRecipes = () => {
      
       fetch('/saved_recipes')
