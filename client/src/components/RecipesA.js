@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-// import { Splide, SplideSlide } from '@splidejs/react-splide';
-import "@splidejs/react-splide/css";
 import Recipeinfo from "./Recipeinfo";
 
 const animatedComponents = makeAnimated();
@@ -13,7 +11,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function RecipesA() {
 
-  console.log(API_KEY);
+  // console.log(API_KEY);
 
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState([]);
@@ -22,6 +20,10 @@ export default function RecipesA() {
   const [userInput, setInput] = useState([]);
   const [addPane, setAddPane] = useState({ visible: false });
   const [recipeID, setRecipeId] = useState();
+  const [resultCount, setResultCount] = useState(0);
+  const [recipeCount, setRecipeCount] = useState(9);
+  const [show, setShow] = useState(false);
+
 
   // should we put into the DB table?
   // https://spoonacular.com/food-api/docs#Diets
@@ -59,12 +61,18 @@ export default function RecipesA() {
   let dietAPI = diet.map((e) => e.value);
   let mealTypeAPI = mealType.map((e) => e.value);
 
+  useEffect(() => {
+    getRecipes();
+  }, [recipeCount]);
+
   const getRecipes = async () => {
     const api = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=6&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
     );
     const data = await api.json();
+    console.log(data)
     setRecipes(data.results);
+    setResultCount(data.totalResults);
   };
 
   function handleInput(e) {
@@ -81,6 +89,15 @@ export default function RecipesA() {
     setRecipeId(id);
   }
 
+  function moreRecipes(){
+    setRecipeCount(recipeCount * 2);
+    console.log(recipeCount);
+  }
+
+  const handleSearch = () => {
+    setShow(true)
+  };
+
   return (
     <div className="container-xxl">
       
@@ -96,8 +113,7 @@ export default function RecipesA() {
           <div className="col-md-8">
             <div className="card">
               <div className="card-header bg-success">
-                {" "}
-                Select your diet restrictions{" "}
+                <p className="mt-2 mb-2">Select your diet restrictions</p>
               </div>
 
               <div className="card-body">
@@ -119,25 +135,12 @@ export default function RecipesA() {
           <div className="col-md-8">
             <div className="card">
               <div className="card-header bg-success">
-                {" "}
-                Select your intolerances{" "}
+                <p className="mt-2 mb-2">Select your intolerances
+                </p>
               </div>
 
               <div className="card-body">
                 <div className="form-group">
-                  {/* <label className="form-label">
-                    Meal type
-                    <Select
-                      closeMenuOnSelect={false}
-                      components={animatedComponents}
-                      isMulti
-                      options={mealTypes}
-                      onChange={(value) => setMeal(value)}
-                    />
-                  </label> */}
-
-                  {/* <label className="form-label"> */}
-                    {" "}
                     <Select
                       closeMenuOnSelect={false}
                       components={animatedComponents}
@@ -145,7 +148,6 @@ export default function RecipesA() {
                       options={intolerances}
                       onChange={(value) => setIntolerance(value)}
                     />
-                  {/* </label> */}
                 </div>
               </div>
             </div>
@@ -156,13 +158,12 @@ export default function RecipesA() {
           <div className="col-md-8">
             <div className="card">
               <div className="card-header bg-success">
-                {" "}
-                Select a meal type{" "}
+              <p className="mt-2 mb-2">Select a meal type
+                </p>
               </div>
 
               <div className="card-body">
                 <div className="form-group">
-                  {/* <label className="form-label"> */}
                     <Select
                       closeMenuOnSelect={false}
                       components={animatedComponents}
@@ -170,7 +171,6 @@ export default function RecipesA() {
                       options={mealTypes}
                       onChange={(value) => setMeal(value)}
                     />
-                  {/* </label> */}
                 </div>
               </div>
             </div>
@@ -181,8 +181,8 @@ export default function RecipesA() {
           <div className="col-md-8">
             <div className="card">
               <div className="card-header bg-success">
-                {" "}
-                Search by ingredient, recipe name or random word{" "}
+              <p className="mt-2 mb-2">Search by ingredient, recipe name or random word
+                </p>
               </div>
               <div className="card-body">
                 <div className="form-group">
@@ -199,7 +199,7 @@ export default function RecipesA() {
 
         <div className="row mt-4 mb-4 justify-content-center">
           <div className="col-md-8">
-        <button className="btn btn-success center" type="submit">
+        <button onClick={handleSearch} className="btn btn-success center mb-4" type="submit">
           Search recipes
         </button>  
         </div>        
@@ -207,38 +207,28 @@ export default function RecipesA() {
 
       </form>
  
-
-      <div className="container text-center">
-        <div className="row">
-          {/* <Splide 
-   options={{
-    perPage: 3,
-    drag: "free",
-    gap: "5rem",
-   }}
-   > */}
+    {show ?
+      <div className="container">
+        {recipeCount && <h5 className="mb-4">We found {resultCount} recipes related to your query: "{userInput}"</h5>}
+       <div className="row">
 
           {recipes.map((recipe) => {
             return (
-              // <SplideSlide key={recipe.id}>
-              <div className="col-md-3 mb-4" key={recipe.id}>
-                {/* <Card style={{"width":"10rem", "fontSize": "10"}} > */}
+              <div className="col-md-4 mb-4 text-center" key={recipe.id}>
                 <Card className="h-100">
-                  {/* <Card.Header>{recipe.title}</Card.Header> */}
                   <Card.Img
                     variant="top"
                     src={recipe.image}
                     alt={recipe.title}
                   />
                   <Card.Body className="d-flex flex-wrap justify-content-center">
-                    <Card.Title className="mt-2 align-self-start">{recipe.title}</Card.Title>
+                    <Card.Title className="mt-2 w-100">{recipe.title}</Card.Title>
                     <Button className="mt-2 align-self-end" onClick={() => viewRecipe(recipe.id)}>
                       View recipe
                     </Button>
                   </Card.Body>
                 </Card>
               </div>
-              // </SplideSlide>
             );
           })}
           {addPane.visible && (
@@ -249,9 +239,11 @@ export default function RecipesA() {
             />
           )}
 
-          {/* </Splide>    */}
         </div>
-      </div>
+        <div className="d-flex justify-content-center m-4">
+        <Button onClick={(e) => {moreRecipes(e)}}>Load more recipes</Button>
+        </div>
+      </div> : false }
     </div>
   );
 }
