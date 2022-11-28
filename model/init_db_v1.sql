@@ -42,7 +42,7 @@ CREATE TABLE `orders`(
     `order_cost` DECIMAL(8, 2) NOT NULL,
     `delivery_cost` DECIMAL(8, 2) NOT NULL,
     `user_id` INT NOT NULL,
-    `payment_date` DATETIME NOT NULL,
+    `payment_date` DATETIME NULL,
     `delivery_status` TINYINT(1) NOT NULL,
     `ordered_ingredients` VARCHAR(999) NOT NULL,
     PRIMARY KEY(id)
