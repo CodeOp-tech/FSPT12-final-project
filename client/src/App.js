@@ -11,6 +11,9 @@ import Recipeinfo from "./components/Recipeinfo";
 import Profile from "./components/Profile";
 import OrdersDashA from "./components/OrdersDashA";
 import SavedRecipes from "./components/SavedRecipes";
+import PaymentSuccess from "./components/PaymentSuccess";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -41,6 +44,7 @@ function App() {
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
         <Route path="profile" element={<Profile />} />
         <Route path="ordersdash" element={<OrdersDashA />} />
+        <Route path="payment-successful" element={<PaymentSuccess />} />
       </Routes>
     </div>
   );
