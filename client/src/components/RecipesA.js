@@ -125,12 +125,7 @@ export default function RecipesA() {
 
   const addToCart = (id) => {
     setRecipeId(id);
-<<<<<<< HEAD
-||||||| fd0ef2b
-    setOrderedRecipes((current) => [...current, recipeID]);
-=======
     //setOrderedRecipes((current) => [...current, recipeID]);
->>>>>>> main
     saveRecipe(recipes.find((rec) => rec.id === recipeID));
     // 3. In recipes_saved, put orderStatus to true
     fetch(`/saved_recipes/${recipeID}`, {
