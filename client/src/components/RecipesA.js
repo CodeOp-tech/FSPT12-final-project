@@ -13,6 +13,7 @@ const BASE_URL = "https://api.spoonacular.com/recipes";
 
 const animatedComponents = makeAnimated();
 
+
 export default function RecipesA() {
   // console.log(API_KEY);
 
