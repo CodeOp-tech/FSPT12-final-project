@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import {Card, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -66,42 +65,50 @@ export default function SavedRecipes() {
      
  
   return (
-    <div>Here are your saved recipes
+    <div>
+      <h1>Welcome to your favourite recipes</h1>  
+ 
+    <div className="row">
 
-  
- <Splide 
-   options={{
-    perPage: 3,
-    drag: "free",
-    gap: "5rem",
-   }}
-   >
     {recipes.map((recipe) => {
       return (
-        <SplideSlide>      
-      <Card style={{"width":"10rem", "fontSize": "10"}} key={recipe.recipe_ID}>
-       <Card.Header>{recipe.recipe_title}</Card.Header>
-       <Card.Img src={recipe.recipe_image} alt={recipe.recipe_title} /> 
-       {/* check if the recipe is already added to the cart of not */}
-       {(recipe.recipe_orderStatus==1) ?
+        <div className="col-md-4 mb-4 text-center" key={recipe.recipe_ID}>
+                  <Card className="h-100">
+                    <Card.Img
+                      variant="top"
+                      src={recipe.recipe_image}
+                      alt={recipe.recipe_title}
+                    />
+                    <Card.Body className="d-flex flex-wrap justify-content-center">
+                      <Card.Title className="mt-2 w-100">
+                        {recipe.recipe_title}
+                      </Card.Title>
+                      <div className="d-flex flex-wrap justify-content-center">
+                         {/* check if the recipe is already added to the cart of not */}
+                        {(recipe.recipe_orderStatus==1) ?
 
-       <Button onClick={navigateToCart}>View cart</Button>       
-       :
-       <Button onClick={()=>addToCart(recipe.recipe_ID)}>Add to cart</Button>       
-    }
-       <Button onClick={() => deleteRecipe(recipe.recipe_ID)}>Delete recipe</Button>
-  
-
-       
-    </Card>      
-    </SplideSlide> 
-      )
-    }
-    )}    
-    </Splide>   
-
-
+                        <Button 
+                        className="mt-2 w-100 align-self-end"
+                        onClick={navigateToCart}>View cart</Button>       
+                         :
+                         <Button 
+                         className="mt-2 w-100 align-self-end"
+                         onClick={()=>addToCart(recipe.recipe_ID)}>Add to cart</Button>       
+                        }
+                        <Button
+                          className="mt-2 w-100 align-self-end"
+                          onClick={() => deleteRecipe(recipe.recipe_ID)}
+                        >
+                          Delete recipe
+                        </Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div> 
+      ) } )} 
 
     </div>
+    </div>
+
   )
 }
