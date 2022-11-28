@@ -13,6 +13,7 @@ const BASE_URL = "https://api.spoonacular.com/recipes";
 
 const animatedComponents = makeAnimated();
 
+
 export default function RecipesA() {
   // console.log(API_KEY);
 
@@ -28,9 +29,7 @@ export default function RecipesA() {
   const [show, setShow] = useState(false);
   const [recipeIngredients, setRecipeIngredients] = useState([]);
 
-  const { orderedRecipes, setOrderedRecipes } = useContext(Context);
-
-  // should we put into the DB table?
+  // should we put into the DB table? 
   // https://spoonacular.com/food-api/docs#Diets
   const dietOptions = [
     { value: "gluten-free", label: "gluten-free" },
@@ -93,7 +92,6 @@ export default function RecipesA() {
     setAddPane({ visible: true });
     setRecipeId(id);
     fetchRecipeIngredients(id);
-  }
 
   const fetchRecipeIngredients = async (id) => {
     const response = await fetch(
