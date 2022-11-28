@@ -3,10 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
 import Recipeinfo from "./Recipeinfo";
-import { Context } from "../Context";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";

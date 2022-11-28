@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import '@splidejs/react-splide/css';
 import {Card, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -45,8 +44,6 @@ export default function SavedRecipes() {
 
     const addToCart = (id) => {
     
-    //setOrderedRecipes(current => [...current, id]);
-
     // 4. In recipes_saved, put orderStatus to true
       fetch(`/saved_recipes/${id}`, {
         method: "PUT",
@@ -66,8 +63,9 @@ export default function SavedRecipes() {
  
   return (
     <div>
-      <h1>Welcome to your favourite recipes</h1>  
- 
+      <h1 className='text-center'>Welcome to your favourite recipes</h1>  
+      <div className="container">
+
     <div className="row">
 
     {recipes.map((recipe) => {
@@ -109,6 +107,8 @@ export default function SavedRecipes() {
 
     </div>
     </div>
+    </div>
+
 
   )
 }

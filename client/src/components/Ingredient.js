@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useEffect, useContext} from 'react';
 import "./Ingredient.css";
 import { Context } from "../Context";
 
@@ -9,12 +9,15 @@ import { Context } from "../Context";
 const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
 export default function Ingredient({ingredients, servings}) {
-  
-    const [serving, setServings] = useState(servings);
 
-    const [checkedState, setCheckedState] = useState(
-    new Array(ingredients.length).fill(false)
-  );
+  const defaultState =  new Array(ingredients.length).fill(false); 
+  const [checkedState, setCheckedState] = useState(()=> (defaultState));
+
+    console.log(new Array(ingredients.length).fill(false))
+    console.log("Checked state is", checkedState);
+
+  const [serving, setServings] = useState(servings);
+
 
   const [total, setTotal] = useState(0);
   const {orderedIngredients, setOrderedIngredients} = useContext(Context);
@@ -27,6 +30,9 @@ export default function Ingredient({ingredients, servings}) {
     );
 
     setCheckedState(updatedCheckedState);
+    console.log("Checked state is: ",checkedState);
+
+    console.log("Updated checked state is: ",updatedCheckedState);
 
     if (updatedCheckedState[position]) {
      setOrderedIngredients([...orderedIngredients, ingredients[position]]);
