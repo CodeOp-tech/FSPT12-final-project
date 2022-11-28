@@ -3,6 +3,9 @@ import Card from "react-bootstrap/Card";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
+const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
+
+
 export default function Recipeinfo({
   visible,
   closePane,
@@ -34,7 +37,7 @@ export default function Recipeinfo({
               </div>
               <div className="ms-3 w-50">
                 <h1>{recipeInfo.title}</h1>
-                <p><strong>Price per serving: € {recipeInfo.pricePerServing}</strong></p>
+                <p><strong>Price per serving:  {getFormattedPrice(recipeInfo.pricePerServing/100)}</strong></p>
                 <p><strong>Ready in: {recipeInfo.readyInMinutes} minutes</strong></p>
                 <div className="d-flex w-100">
                   <button className="btn btn-success" onClick={addToCart}>Add to cart</button>
@@ -85,8 +88,8 @@ export default function Recipeinfo({
                         )})}
                         <hr/>
                         <div className="d-flex flex-wrap">
-                        <p className="w-100">Total cost per serving: {recipeIngredients.totalCostPerServing/100} $</p>
-                        <p className="w-100">Total cost per person: {recipeIngredients.totalCost/100} $</p>
+                        <p className="w-100">Total cost per serving: {getFormattedPrice(recipeIngredients.totalCostPerServing/100)} </p>
+                        <p className="w-100">Total cost per recipe: {getFormattedPrice(recipeIngredients.totalCost/100)} </p>
                         </div>
                     </div>
                   )}
