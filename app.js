@@ -9,6 +9,7 @@ const mysql = require('mysql');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var savedRecipeRouter = require('./routes/savedRecipes');
+var orderRouter = require('./routes/orders');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/saved_recipes', savedRecipeRouter);
+app.use('/orders', orderRouter)
 
 // Anything that doesn't match the above paths, send back index.html
 // the order of these app.get's matters, so if we put this "*" before the others, we would only be directed to index.html

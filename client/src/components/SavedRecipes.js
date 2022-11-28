@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
 import {Card, Button} from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function SavedRecipes() {
-
+    const navigate = useNavigate();
     const [recipes, setRecipes] = useState([{recipe_image: "", recipe_title: "", recipe_summary: ""}]);
-  
+
+
     useEffect(() => {
      getRecipes();
     }, []);
@@ -35,38 +35,80 @@ export default function SavedRecipes() {
             setRecipes(recipes); 
             alert("Recipe deleted successfully!");   
     }
+
+    const navigateToCart = () => {
+     
+      navigate('/cartN');
+
+    }
+
+    const addToCart = (id) => {
+    
+    // 4. In recipes_saved, put orderStatus to true
+      fetch(`/saved_recipes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          'recipe_orderStatus': 1, 
+        }) 
+      })
+      .then (res => res.json()) 
+
+      alert("Recipe added to cart!");
+     }
+
+     
  
   return (
-    <div>Here are your saved recipes
+    <div>
+      <h1 className='text-center'>Welcome to your favourite recipes</h1>  
+      <div className="container">
 
-  
- <Splide 
-   options={{
-    perPage: 3,
-    drag: "free",
-    gap: "5rem",
-   }}
-   >
+    <div className="row">
+
     {recipes.map((recipe) => {
       return (
-        <SplideSlide>      
-      <Card style={{"width":"10rem", "fontSize": "10"}} key={recipe.recipe_ID}>
-       <Card.Header>{recipe.recipe_title}</Card.Header>
-       <Card.Img src={recipe.recipe_image} alt={recipe.recipe_title} />       
-       <Button href={`${recipe.recipe_summary}`} target="_blank">View recipe</Button>
-       <Button>Add to cart</Button>       
-       <Button onClick={() => deleteRecipe(recipe.recipe_ID)}>Delete recipe</Button>
+        <div className="col-md-4 mb-4 text-center" key={recipe.recipe_ID}>
+                  <Card className="h-100">
+                    <Card.Img
+                      variant="top"
+                      src={recipe.recipe_image}
+                      alt={recipe.recipe_title}
+                    />
+                    <Card.Body className="d-flex flex-wrap justify-content-center">
+                      <Card.Title className="mt-2 w-100">
+                        {recipe.recipe_title}
+                      </Card.Title>
+                      <div className="d-flex flex-wrap justify-content-center">
+                         {/* check if the recipe is already added to the cart of not */}
+                        {(recipe.recipe_orderStatus==1) ?
 
-       
-    </Card>      
-    </SplideSlide> 
-      )
-    }
-    )}    
-    </Splide>   
-
-
+                        <Button 
+                        className="mt-2 w-100 align-self-end"
+                        onClick={navigateToCart}>View cart</Button>       
+                         :
+                         <Button 
+                         className="mt-2 w-100 align-self-end"
+                         onClick={()=>addToCart(recipe.recipe_ID)}>Add to cart</Button>       
+                        }
+                        <Button
+                          className="mt-2 w-100 align-self-end"
+                          onClick={() => deleteRecipe(recipe.recipe_ID)}
+                        >
+                          Delete recipe
+                        </Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div> 
+      ) } )} 
 
     </div>
+    </div>
+    </div>
+
+
   )
 }
