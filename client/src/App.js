@@ -17,7 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import OrdersDashA from "./components/OrdersDashA";
 import SavedRecipes from "./components/SavedRecipes";
-import OrdersHistory from "./components/OrdersHistory";
+import OrderHistory from "./components/OrderHistory";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/other">Other</Nav.Link>
-            <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+            <Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
             <Nav.Link as={NavLink} to="/payment">Payment</Nav.Link>
             <Nav.Link as={NavLink} to="/recipes">Recipe search</Nav.Link>
             <Nav.Link as={NavLink} to="/saved_recipes">Saved recipes</Nav.Link>
@@ -56,7 +56,7 @@ function App() {
         <Route path="saved_recipes" element={<SavedRecipes />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="orders_history" element={<OrdersHistory />} />
+        <Route path="order_history" element={<OrderHistory />} />
         <Route path="ordersdash" element={<OrdersDashA />} />
       </Routes>
     </div>

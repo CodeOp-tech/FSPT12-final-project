@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+//import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-//import "./index.css";
-/* import {
+import "../register.css";
+import { Link } from "react-router-dom";
+ import {
   MDBBtn,
   MDBContainer,
   MDBRow,
@@ -13,14 +15,20 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
   MDBCardBody,
   MDBInput,
   MDBCheckbox,
-  MDBSelect
 }
-from 'mdb-react-ui-kit'; */
+from 'mdb-react-ui-kit'; 
+
 
 function Register() {
   const [user, setUser] = useState({
-    username: "test",
-    password: "test",
+    email: "",
+    password: "",
+    firstname: "",
+    lastname: "",
+    profile_pic: "",
+    address: "",
+    city: "",
+    zipcode: ""
   });
 
   const navigate = useNavigate();
@@ -47,7 +55,7 @@ function Register() {
     <div>
       <h1>Signup</h1>
 
-{/*     <MDBContainer fluid className='h-custom'>
+    <MDBContainer fluid className='h-custom'>
 
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol col='12' className='m-5'>
@@ -60,100 +68,56 @@ function Register() {
 
                 <MDBCol md='6' className='p-5 bg-white'>
 
-                  <h3 className="fw-normal mb-5" style={{color: '#4835d4'}}>General Infomation</h3>
-                  <MDBSelect
-                    className='mb-4'
-                    size='lg'
-                    data={[
-                      { text: 'Titile', value: 1 },
-                      { text: 'Two', value: 2 },
-                      { text: 'Three', value: 3 },
-                      { text: 'Four', value: 4 }
-                    ]}
-                    />
+                  <h3 className="fw-normal mb-5" style={{color: '#4835d4'}}>Login Information</h3>
 
-                  <MDBRow>
+                  <MDBInput wrapperClass='mb-4' labelClass='text-black' value={user.email} onChange={handleChange} name = "email" label='Email' size='lg' id='form3' type='text'/>
 
-                    <MDBCol md='6'>
-                      <MDBInput wrapperClass='mb-4' label='First Name' size='lg' id='form1' type='text'/>
-                    </MDBCol>
-
-                    <MDBCol md='6'>
-                      <MDBInput wrapperClass='mb-4' label='Last Name' size='lg' id='form2' type='text'/>
-                    </MDBCol>
-
-                  </MDBRow>
-
-                  <MDBSelect
-                    className='mb-4'
-                    size='lg'
-                    data={[
-                      { text: 'Position', value: 1 },
-                      { text: 'Two', value: 2 },
-                      { text: 'Three', value: 3 },
-                      { text: 'Four', value: 4 }
-                    ]}
-                    />
-                  <MDBInput wrapperClass='mb-4' label='Position' size='lg' id='form3' type='text'/>
-
-                  <MDBRow>
-
-                    <MDBCol md='6'>
-                      <MDBInput wrapperClass='mb-4' label='Bussines Arena' size='lg' id='form4' type='text'/>
-                    </MDBCol>
-
-                    <MDBCol md='6'>
-                      <MDBSelect
-                        className='mb-4'
-                        size='lg'
-                        data={[
-                          { text: 'Employees', value: 1 },
-                          { text: 'Two', value: 2 },
-                          { text: 'Three', value: 3 },
-                          { text: 'Four', value: 4 }
-                        ]}
-                        />
-                    </MDBCol>
-
-                  </MDBRow>
+                  <MDBInput wrapperClass='mb-4' labelClass='text-black' value={user.password}
+          onChange={handleChange} name="password" label='Password' size='lg' id='form3' type='text'/>
 
                 </MDBCol>
 
 
                 <MDBCol md='6' className='bg-indigo p-5'>
 
-                  <h3 className="fw-normal mb-5 text-white" style={{color: '#4835d4'}}>Contact Details</h3>
-                  <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Street + Nr' size='lg' id='form5' type='text'/>
-                  <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Additional Information' size='lg' id='form6' type='text'/>
+                  <h3 className="fw-normal mb-5 text-white" style={{color: '#4835d4'}}>Profile Setup</h3>
 
+                
                   <MDBRow>
 
-                    <MDBCol md='5'>
-                      <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Zip Code' size='lg' id='form6' type='text'/>
+                    <MDBCol md='6'>
+                      <MDBInput wrapperClass='mb-4' labelClass='text-white' value={user.firstname}
+          onChange={handleChange} name="firstname" label='First Name' size='lg' id='form1' type='text'/>
                     </MDBCol>
 
-                    <MDBCol md='7'>
-                      <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Place' size='lg' id='form7' type='text'/>
+                    <MDBCol md='6'>
+                      <MDBInput wrapperClass='mb-4' labelClass='text-white' value={user.lastname}
+          onChange={handleChange} name="lastname" label='Last Name' size='lg' id='form2' type='text'/>
                     </MDBCol>
 
                   </MDBRow>
 
-                  <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Country' size='lg' id='form8' type='text'/>
+                  <MDBInput wrapperClass='mb-4' labelClass='text-white' value={user.profile_pic}
+          onChange={handleChange} name="profile_pic" label='Profile image URL' size='lg' id='form5' type='url'/>
+                  <MDBInput wrapperClass='mb-4' value={user.address}
+          onChange={handleChange} name="address" labelClass='text-white' label='Nr + Street' size='lg' id='form5' type='text'/>
 
                   <MDBRow>
 
                     <MDBCol md='5'>
-                      <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Code +' size='lg' id='form9' type='text'/>
+                      <MDBInput wrapperClass='mb-4' value={user.city}
+          onChange={handleChange} name="city" labelClass='text-white' label='City' size='lg' id='form6' type='text'/>
                     </MDBCol>
 
                     <MDBCol md='7'>
-                      <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Phone Number' size='lg' id='form10' type='text'/>
+                      <MDBInput wrapperClass='mb-4' value={user.zipcode}
+          onChange={handleChange} name="zipcode" labelClass='text-white' label='Zipcode' size='lg' id='form7' type='text'/>
                     </MDBCol>
+
                   </MDBRow>
 
-                  <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Your Email' size='lg' id='form8' type='email'/>
-                  <MDBCheckbox name='flexCheck' id='flexCheckDefault' labelClass='text-white mb-4' label='I do accept the Terms and Conditions of your site.' />
-                  <MDBBtn color='light' size='lg'>Register</MDBBtn>
+                  <MDBCheckbox name='flexCheck' id='flexCheckDefault' labelClass='text-white mb-4' label='I accept the Terms and Conditions.' />
+                  <MDBBtn onClick={login} color='light' size='lg'>Register</MDBBtn>
 
                 </MDBCol>
               </MDBRow>
@@ -166,11 +130,9 @@ function Register() {
       </MDBRow>
 
     </MDBContainer>
-  );
-} */}
 
 
-      <form>
+{/*       <form>
   <div className="form-row">
     <div className="form-group col-md-6">
       <label for="inputEmail4">Email</label>
@@ -218,7 +180,7 @@ function Register() {
     </div>
   </div>
   <button type="submit" className="btn btn-primary">Signup</button>
-</form>
+</form> */}
 {/*       <div>
         <input
           value={user.username}
@@ -239,7 +201,7 @@ function Register() {
         </button>
       </div> */}
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
