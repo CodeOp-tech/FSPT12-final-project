@@ -29,7 +29,7 @@ export default function RecipesA() {
   const [show, setShow] = useState(false);
   const [recipeIngredients, setRecipeIngredients] = useState([]);
 
-  // should we put into the DB table? 
+  // should we put into the DB table?
   // https://spoonacular.com/food-api/docs#Diets
   const dietOptions = [
     { value: "gluten-free", label: "gluten-free" },
@@ -92,6 +92,7 @@ export default function RecipesA() {
     setAddPane({ visible: true });
     setRecipeId(id);
     fetchRecipeIngredients(id);
+  }
 
   const fetchRecipeIngredients = async (id) => {
     const response = await fetch(
@@ -284,18 +285,26 @@ export default function RecipesA() {
                       <Card.Title className="mt-2 w-100">
                         {recipe.title}
                       </Card.Title>
-                      <Button
-                        className="mt-2 align-self-end"
-                        onClick={() => viewRecipe(recipe.id)}
-                      >
-                        View recipe
-                      </Button>
-                      <Button onClick={() => addToCart(recipe.id)}>
-                        Add to cart
-                      </Button>
-                      <Button onClick={() => saveRecipe(recipe)}>
-                        Save to favourites
-                      </Button>
+                      <div className="d-flex flex-wrap justify-content-center">
+                        <Button
+                          className="mt-2 w-100 align-self-end"
+                          onClick={() => viewRecipe(recipe.id)}
+                        >
+                          View recipe
+                        </Button>
+                        <Button
+                          className="mt-2 w-100 align-self-end"
+                          onClick={() => addToCart(recipe.id)}
+                        >
+                          Add to cart
+                        </Button>
+                        <Button
+                          className="mt-2 w-100 align-self-end"
+                          onClick={() => saveRecipe(recipe)}
+                        >
+                          Save to favourites
+                        </Button>
+                      </div>
                     </Card.Body>
                   </Card>
                 </div>

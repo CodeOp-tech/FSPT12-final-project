@@ -38,7 +38,7 @@ export default function Recipeinfo({
                 <p><strong>Ready in: {recipeInfo.readyInMinutes} minutes</strong></p>
                 <div className="d-flex w-100">
                   <button className="btn btn-success" onClick={addToCart}>Add to cart</button>
-                  <button className="btn btn-success ms-1" onClick={addRecipe}>Save recipe</button>
+                  <button className="btn btn-success ms-1" onClick={saveRecipe}>Save recipe</button>
                 </div>
               </div>
             </div>
