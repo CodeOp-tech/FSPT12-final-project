@@ -2,12 +2,18 @@ import axios from "axios";
 import React, { useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import {Routes, Route, useNavigate} from 'react-router-dom';
+import { Context } from "../Context";
+import {useContext} from 'react';
 
 export default function PaymentA() {
+
   //create post request to store orders in the 'orders' table --> fetch & display in OrdersDash
-  //create logic for couting delivery cost
-  //CREATE SUCCESS PAGE!!!
+  
+  //create logic for counting delivery cost
+
   const navigate = useNavigate();
+
+  const {orderedIngredients, setOrderedIngredients} = useContext(Context);
 
   //order objects with all the order details we need for the payment
   //need to pass this as props to PaymentSuccess.js
@@ -18,7 +24,7 @@ export default function PaymentA() {
     user_id: 123, //int
     payment_date: "payment_date", //datetime
     delivery_status: false, //tinyint
-    recipe_ids: "123, 456", //varchar
+    ordered_ingredients: ['apple', 'banana'], //varchar
   });
 
   const handleToken = async (token, addresses) => {
@@ -28,8 +34,6 @@ export default function PaymentA() {
     });
 
     //take the response and check for the status property
-    console.log(response.status);
-
     if (response.status === 200) {
       //redirecting the user to the 'Payment Succesful' page
       navigate('/payment-successful');
