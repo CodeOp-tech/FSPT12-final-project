@@ -15,8 +15,7 @@ export default function CartNadia() {
     const [ingredients, setIngredients] = useState([]);
     const [recipes, setRecipes] = useState([]);
     const [clickedID, setID] = useState();
-    const [totalPrice, setTotalPrice] = useState(0);
-    const {orderedIngredients, setOrderedIngredients} = useContext(Context);
+    const {orderedIngredients, setOrderedIngredients, totalPrice, setTotalPrice} = useContext(Context);
     const navigate = useNavigate();
 
 

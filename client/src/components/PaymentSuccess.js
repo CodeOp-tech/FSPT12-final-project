@@ -1,81 +1,39 @@
 import React, { useState } from "react";
 import { Context } from "../Context";
-import {useContext} from 'react';
+import { useContext } from "react";
 
 export default function PaymentSuccess() {
-
-  const {orderedIngredients, setOrderedIngredients} = useContext(Context);
-
-  const [order, setOrder] = useState({
-    id: 123, //int
-    order_cost: 200, //decimal
-    delivery_cost: 20, //decimal
-    user_id: 123, //int
-    payment_date: "payment_date", //datetime
-    delivery_status: false, //tinyint
-    ordered_ingredients: "123, 456", //varchar
-  });
-
-  //I need to fetch the list of ingredients based on the recipe ids.
+  const { orderedIngredients, setOrderedIngredients, totalPrice } = useContext(Context);
 
   console.log(orderedIngredients);
 
   return (
     <div>
-      <h1>Thank you for your order! Your payment was successful.</h1>
-      <h3>Order Summary</h3>
+      <h1 className="m-5">Thank you for your order! Your payment was successful.</h1>
+      <h3 className="m-5">Order Summary</h3>
 
       <div className="list-group">
+        {/*loop through object with info about ingrediens and quantities*/}
 
-      {/*loop through some kind of object with info about ingrediens and quantities*/}
-
-        <p
-          className="list-group-item list-group-item-action flex-column align-items-start"
-        >
-          <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1">{orderedIngredients[0]}</h5>
-            <small>Price in total: 5$</small>
+        {orderedIngredients.map((ingredient) => (
+          <div
+            key={ingredient.id}
+            className="list-group-item list-group-item-action flex-column align-items-start"
+          >
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1">{ingredient.name}</h5>
+              {/* <small>Price: {(((ingredient.price / 100) * (ingredient.amount.metric.value)) / 100).toFixed(2)} USD</small> */}
+            </div>
+            <p className="mb-1">Amount: {ingredient.amount.metric.value} {ingredient.amount.metric.unit}</p>
+          <small>Price per serving: {(ingredient.price / 100).toFixed(2)} USD</small>
           </div>
-          <p className="mb-1">
-            Quantity: 3 pieces
-          </p>
-          <small>Recipe: Include recipe title here</small>
-        </p>
+        ))}
 
+        <h2 className="m-3">Total amount paid: {totalPrice} USD</h2>
 
+        <h5 className="m-3">We'll notify you when your order is on the way.</h5>
 
-        <p
-          className="list-group-item list-group-item-action flex-column align-items-start"
-        >
-          <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1">Banana</h5>
-            <small>Price in total: 6$</small>
-          </div>
-          <p className="mb-1">
-            Quantity: 2 pieces
-          </p>
-          <small>Recipe: Include recipe title here</small>
-        </p>
-
-
-
-        <p
-          className="list-group-item list-group-item-action flex-column align-items-start"
-        >
-          <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1">Walnut</h5>
-            <small>Price in total: 8$</small>
-          </div>
-          <p className="mb-1">
-            Quantity: 20 dkg
-          </p>
-          <small>Recipe: Include recipe title here</small>
-        </p>
       </div>
-
-    <h4>In total you paid: 29$ (Including delivery fee, which is 10$)</h4>
-
-    <h5>We'll notify you when your orders is on the way.</h5>
 
     </div>
   );
