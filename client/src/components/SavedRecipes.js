@@ -62,9 +62,10 @@ export default function SavedRecipes() {
      
  
   return (
-    <div>
-      <h1 className='text-center'>Welcome to your favourite recipes</h1>  
-      <div className="container">
+    <div className="container-xxl">
+      <div className="mt-5 mb-5">
+        <h1 className="text-left">Saved Recipes</h1>
+      </div>
 
     <div className="row">
 
@@ -105,7 +106,6 @@ export default function SavedRecipes() {
                 </div> 
       ) } )} 
 
-    </div>
     </div>
     </div>
 

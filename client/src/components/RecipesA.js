@@ -152,7 +152,7 @@ export default function RecipesA() {
 
   return (
     <div className="container-xxl">
-      <div className="mt-4 mb-4">
+      <div className="mt-5 mb-5">
         <h1 className="text-center">Discover new recipes you'll love</h1>
         <p className="text-center">
           Enter your eating preferences, restrictions, needs and more.
