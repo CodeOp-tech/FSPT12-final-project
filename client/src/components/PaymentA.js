@@ -29,7 +29,7 @@ export default function PaymentA() {
       console.log(ingredientsArray);
       console.log(ingredientsArrayString)
 
-      const response = await fetch("/", {
+      const response = await fetch("/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

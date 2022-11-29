@@ -8,7 +8,7 @@ router.post('/', async(req,res) => {
 
     let {order_cost, delivery_cost, user_id, payment_date, delivery_status, ordered_ingredients} = req.body;
    
-    await db(`INSERT INTO orders (order_cost, delivery_cost, user_id, payment_date,  delivery_status, ordered_ingredients) VALUES (${order_cost}, ${delivery_cost}, ${user_id}, ${payment_date}, ${delivery_status}, ${ordered_ingredients}`);
+    await db(`INSERT INTO orders (order_cost, delivery_cost, user_id, payment_date,  delivery_status, ordered_ingredients) VALUES ("${order_cost}", "${delivery_cost}", "${user_id}", "${payment_date}", "${delivery_status}", "${ordered_ingredients}");`);
     
     res.send({message: "Order cost added successfully!"});
    });
