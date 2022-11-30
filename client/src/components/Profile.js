@@ -92,8 +92,40 @@ const User = () => {
 
 {/*     Attempt #2 with my own bootstrap works with dynamic info being displayed */}
 
-     <section style={{backgroundColor:"yellow", minHeight:800, paddingTop:50, paddingBottom:50, paddingLeft:200, paddingRight:200}}>
-      <div style={{background:"white", minHeight:700}}>
+     <section className="background" style={{minHeight:800, paddingTop:50, paddingBottom:50, paddingLeft:200, paddingRight:200}}>
+      <div className="rounded" style={{background:"white", minHeight:700}}>
+      <div className="rounded-top" style={{background:"black", minHeight:100}}>
+        <div className="row">
+        <div className="container col" style={{paddingTop:50, paddingLeft:35}}>    <img
+      src={'https://mdbootstrap.com/img/new/standard/city/041.webp'}
+      className='img-thumbnail'
+      alt='...' style={{maxHeight:100, maxWidth:100}}
+    /></div>
+    <div
+      className="col" style={{color:"white", paddingTop:70, paddingRight:450}}><h3>Andy</h3>
+    </div>
+      </div>
+      </div>
+      <div className="container" style={{background:"#F8F8F8", minHeight:70}}>
+        <div className="row">
+          <div className="container col text-center" style={{paddingTop:5, paddingLeft:450}}><h5>23<br></br></h5>Recipes Saved
+          </div>
+          <div className="container col text-center" style={{paddingTop:5}}><h5>5<br></br></h5>Recipes Made
+          </div>
+        </div>
+      </div>
+      <section className="address" style={{color:"white", minHeight:300, paddingTop:50, paddingBottom:20, paddingLeft:20, paddingRight:20}}>
+        <div className="text" style={{color:"black"}}><h4>Delivery Info</h4></div>
+      <div className="contact" style={{background:"#F8F8F8", minHeight:150}}>
+        <div className="details" style={{color:"black", paddingLeft:20, paddingTop:30}}><p>street<br></br>
+        city<br></br>
+        zipcode</p>
+       </div>
+      </div>
+      </section>
+      <div className="saved" style={{paddingLeft:20}}><h4>Saved Recipes</h4>
+
+      </div>
       </div>
       </section>
       <div className="profile">
