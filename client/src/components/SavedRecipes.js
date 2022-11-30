@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SavedRecipes() {
     const navigate = useNavigate();
-    const [recipes, setRecipes] = useState([{recipe_image: "", recipe_title: "", recipe_summary: ""}]);
-
+    const [recipes, setRecipes] = useState([]);
+    
 
     useEffect(() => {
      getRecipes();
@@ -27,6 +27,11 @@ export default function SavedRecipes() {
     }  
     
     const deleteRecipe = async(recipe_ID) => {
+
+      let confirmed = window.confirm(
+        "Are you sure you want to delete this recipe?"
+      );
+      if (confirmed) {
         // delete a recipe from the database
         try {
             const response = await fetch(`/saved_recipes/${recipe_ID}`, {
@@ -39,6 +44,7 @@ export default function SavedRecipes() {
         catch (err) {
             return err;
         }
+      }
     }
 
     const navigateToCart = () => {
@@ -59,8 +65,9 @@ export default function SavedRecipes() {
           'recipe_orderStatus': 1, 
         }) 
       })
-      .then (res => res.json()) 
-
+      .then (res => res.json())
+      .catch(error => (console.log(error))); 
+      getRecipes();
       alert("Recipe added to cart!");
      }
 

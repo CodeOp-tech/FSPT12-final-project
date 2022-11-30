@@ -75,6 +75,11 @@ export default function ShoppingCart() {
 
   const deleteRecipe = (id) => {
      setID(id);
+
+    let confirmed = window.confirm(
+      "Are you sure you want to delete this recipe from the cart?"
+    );
+    if (confirmed) {
     // 4. In recipes_saved, put orderStatus to false = 0
       fetch(`/saved_recipes/${id}`, {
         method: "PUT",
@@ -88,9 +93,10 @@ export default function ShoppingCart() {
       .then (res => res.json())
       .catch((error) => {
         console.log(error);});
-   
 
       alert("Recipe deleted from cart!");
+      }
+
      }
 
 
