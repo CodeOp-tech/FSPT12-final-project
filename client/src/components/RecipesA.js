@@ -64,7 +64,7 @@ export default function RecipesA() {
 
   useEffect(() => {
     getRecipes();
-  }, [recipeCount, recipeID]);
+  }, [recipeCount]);
 
   const getRecipes = async () => {
     const api = await fetch(
@@ -130,14 +130,12 @@ export default function RecipesA() {
   };
 
   const addToCart = (id) => {
-    console.log("We are in the addToCart, recipes ", recipes);
     setRecipeId(id);
-    console.log(recipeID);
-    let recipe = recipes.find((rec) => rec.id === recipeID);
-    console.log(recipes.find((rec) => rec.id === recipeID));
+    let recipe = recipes.find((rec) => rec.id === id);
+    console.log(recipes.find((rec) => rec.id === id));
     saveRecipe(recipe);
     // In recipes_saved, put orderStatus to true
-    fetch(`/saved_recipes/${recipeID}`, {
+    fetch(`/saved_recipes/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
