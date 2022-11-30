@@ -1,31 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import Ingredient from "./Ingredient";
-import { Context } from "../Context";
 import { useNavigate } from "react-router-dom";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
 const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
-export default function CartNadia() {
+export default function ShoppingCart() {
   const [ingredients, setIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [clickedID, setID] = useState();
   const [totalPrice, setTotalPrice] = useState(0);
-  const { orderedIngredients, setOrderedIngredients } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
     getRecipes();
-  }, []);
+  }, [clickedID]);
 
-  console.log("Cart ordered ingredients: ", orderedIngredients);
   const getRecipes = () => {
     fetch("/saved_recipes")
       .then((res) => res.json())
-      .then((json) => json.filter((e) => e.recipe_orderStatus == 1))
+      .then((json) => json.filter((e) => e.recipe_orderStatus === 1))
       .then((json) => setRecipes(json))
 
       .catch((error) => {
@@ -52,10 +49,13 @@ export default function CartNadia() {
         order_cost: price,
         user_id: 1,
       }),
-    }).then((res) => res.json());
+    }).then((res) => res.json())
+    .catch((error) => {
+      console.log(error);
+    });
 
-    alert("Order saved in DB!");
-    //navigate('/payment');
+    alert("Your order is accepted");
+    navigate('/payment');
   }
 
   const handleClick = async (id) => {
@@ -72,6 +72,28 @@ export default function CartNadia() {
     console.log("Ingredients fetched are: ", ingredients);
     // alert('Ingredients fetched!');
   };
+
+  const deleteRecipe = (id) => {
+     setID(id);
+    // 4. In recipes_saved, put orderStatus to false = 0
+      fetch(`/saved_recipes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          'recipe_orderStatus': 0, 
+        }) 
+      })
+      .then (res => res.json())
+      .catch((error) => {
+        console.log(error);});
+   
+
+      alert("Recipe deleted from cart!");
+     }
+
+
 
   return (
     <div className="container-xxl">
@@ -98,6 +120,12 @@ export default function CartNadia() {
                     <Card.Title className="mt-2 w-100">
                       {recipe.recipe_title}
                     </Card.Title>
+                    <Button
+                          className="mt-2 w-100 align-self-end"
+                          onClick={() => deleteRecipe(recipe.recipe_ID)}
+                        >
+                          Delete recipe
+                        </Button>
                   </Card.Body>
                 </Card>
 

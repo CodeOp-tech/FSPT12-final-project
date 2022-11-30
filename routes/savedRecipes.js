@@ -37,8 +37,9 @@ router.get('/', async (req, res) => {
     
    router.put('/:recipeID', async(req,res) => {
     console.log(req.params);
+    console.log(req.body.recipe_orderStatus);
     console.log("Recipe to be updated is: ", req.params.recipeID);
-    await db(`UPDATE recipes_saved SET recipe_orderStatus = '1' WHERE recipe_ID = "${req.params.recipeID}" and user_id=1;`);
+    await db(`UPDATE recipes_saved SET recipe_orderStatus = "${req.body.recipe_orderStatus}" WHERE recipe_ID = "${req.params.recipeID}" and user_id=1;`);
     const recipes = await getRecipes();
     res.send(recipes);
    })

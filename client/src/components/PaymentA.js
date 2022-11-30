@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { useNavigate }  from 'react-router-dom';
 
 export default function PaymentA() {
   //create post request to store orders in the 'orders' table --> fetch & display in OrdersDash

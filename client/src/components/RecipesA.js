@@ -64,11 +64,11 @@ export default function RecipesA() {
 
   useEffect(() => {
     getRecipes();
-  }, [recipeCount]);
+  }, [recipeCount, recipeID]);
 
   const getRecipes = async () => {
     const api = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
+      `${BASE_URL}/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
     );
     const data = await api.json();
     console.log(data);
@@ -103,7 +103,7 @@ export default function RecipesA() {
     setRecipeIngredients(info);
   };
 
-  const saveRecipe = (recipeInfo) => {
+  function saveRecipe (recipeInfo) {
     // add the selected recipe to the saved_recipes table
     fetch("/saved_recipes", {
       method: "POST",
@@ -119,15 +119,24 @@ export default function RecipesA() {
         recipe_pricePerServing: recipeInfo.pricePerServing,
         recipe_readyInMinutes: recipeInfo.readyInMinutes,
       }),
-    }).then((res) => res.json());
-    alert("Recipe saved :)");
+    }).then((res) => res.json())
+
+    .catch((error) => {
+
+      console.log(error);
+    });
+
+    alert("Recipe saved");
   };
 
   const addToCart = (id) => {
+    console.log("We are in the addToCart, recipes ", recipes);
     setRecipeId(id);
-    //setOrderedRecipes((current) => [...current, recipeID]);
-    saveRecipe(recipes.find((rec) => rec.id === recipeID));
-    // 3. In recipes_saved, put orderStatus to true
+    console.log(recipeID);
+    let recipe = recipes.find((rec) => rec.id === recipeID);
+    console.log(recipes.find((rec) => rec.id === recipeID));
+    saveRecipe(recipe);
+    // In recipes_saved, put orderStatus to true
     fetch(`/saved_recipes/${recipeID}`, {
       method: "PUT",
       headers: {
@@ -136,7 +145,10 @@ export default function RecipesA() {
       body: JSON.stringify({
         recipe_orderStatus: 1,
       }),
-    }).then((res) => res.json());
+    }).then((res) => res.json())
+
+    .catch((error) => {
+      console.log(error);});
 
     alert("Recipe added to cart!");
   };
@@ -152,7 +164,7 @@ export default function RecipesA() {
 
   return (
     <div className="container-xxl">
-      <div className="mt-5 mb-5">
+      <div className="mt-4 mb-4">
         <h1 className="text-center">Discover new recipes you'll love</h1>
         <p className="text-center">
           Enter your eating preferences, restrictions, needs and more.
