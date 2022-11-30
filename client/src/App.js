@@ -18,7 +18,6 @@ import SavedRecipes from "./components/SavedRecipes";
 import OrderHistory from "./components/OrderHistory";
 import PaymentSuccess from "./components/PaymentSuccess";
 import 'react-toastify/dist/ReactToastify.css';
-import CartNadia from "./components/CartNadia";
 import Container from 'react-bootstrap/Container';
 import NavBar from "./components/Navbar";
 
