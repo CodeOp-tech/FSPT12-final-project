@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+//import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../register.css";
 import { Link } from "react-router-dom";
@@ -53,7 +53,6 @@ function Register() {
 
   return (
     <div>
-      <h1>Signup</h1>
 
     <MDBContainer fluid className='h-custom'>
 
@@ -68,7 +67,7 @@ function Register() {
 
                 <MDBCol md='6' className='p-5 bg-white'>
 
-                  <h3 className="fw-normal mb-5" style={{color: '#4835d4'}}>Login Information</h3>
+                  <h3 className="fw-normal mb-5" style={{color: '#668835'}}>Login Information</h3>
 
                   <MDBInput wrapperClass='mb-4' labelClass='text-black' value={user.email} onChange={handleChange} name = "email" label='Email' size='lg' id='form3' type='text'/>
 
@@ -117,7 +116,7 @@ function Register() {
                   </MDBRow>
 
                   <MDBCheckbox name='flexCheck' id='flexCheckDefault' labelClass='text-white mb-4' label='I accept the Terms and Conditions.' />
-                  <MDBBtn onClick={login} color='light' size='lg'>Register</MDBBtn>
+                  <MDBBtn  onClick={login} color="warning" size='lg'>Register</MDBBtn>
 
                 </MDBCol>
               </MDBRow>

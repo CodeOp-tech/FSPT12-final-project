@@ -5,5 +5,9 @@
 }
 
 .list-group{
-    width:40%;
+    width:30%;
+}
+
+.bg-nav{
+    background-color: #ADE0E1;
 }

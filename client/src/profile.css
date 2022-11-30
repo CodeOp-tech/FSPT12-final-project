@@ -1,6 +1,10 @@
+.background {
+    background-image: linear-gradient(to right top, #234714, #2f623c, #407e64, #599a8d, #7ab5b3, #82c3be, #8bd1c8, #95dfd2, #97e0b8, #adde96, #d0d675, #f8c961);
+}
+
 /* Attempt #1 */
 
-/* .profile-card-3 {
+/*  .profile-card-3 {
     background-color: #FFF;
     border-radius: 5px;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
@@ -50,17 +54,16 @@
     height: 110px;
     width: 110px;
     margin: 5px auto;
-} */
+}  */
 
 /* Attempt #2  */
 
-.gradient-custom-2 {
-    /* fallback for old browsers */
+/* .gradient-custom-2 {
+
     background: #fbc2eb;
     
-    /* Chrome 10-25, Safari 5.1-6 */
+
     background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
-    }
+    } */

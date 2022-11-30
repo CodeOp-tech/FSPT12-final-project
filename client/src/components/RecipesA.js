@@ -12,7 +12,8 @@ const animatedComponents = makeAnimated();
 
 
 export default function RecipesA() {
-  // console.log(API_KEY);
+   //console.log(process.env.REACT_APP_API_KEY);
+
 
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState([]);
@@ -68,7 +69,7 @@ export default function RecipesA() {
 
   const getRecipes = async () => {
     const api = await fetch(
-      `${BASE_URL}/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
+      `${BASE_URL}/complexSearch?apiKey=a072be7433bd4f29b08e974c3ee7997d&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
     );
     const data = await api.json();
     console.log(data);

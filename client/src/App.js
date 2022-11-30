@@ -1,4 +1,5 @@
 import "./App.css";
+import React, { useState} from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -17,33 +18,26 @@ import SavedRecipes from "./components/SavedRecipes";
 import OrderHistory from "./components/OrderHistory";
 import PaymentSuccess from "./components/PaymentSuccess";
 import 'react-toastify/dist/ReactToastify.css';
+import Container from 'react-bootstrap/Container';
+import NavBar from "./components/Navbar";
+
+
 
 function App() {
+
   return (
     <AuthProvider>
-    <div className="App">
-      <Navbar className="bg-success" bg="success" expand="lg">
-        Welcome to Recipe Haul
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
-            <Nav.Link as={NavLink} to="/payment">Payment</Nav.Link>
-            <Nav.Link as={NavLink} to="/recipes">Recipe search</Nav.Link>
-            <Nav.Link as={NavLink} to="/saved_recipes">Saved recipes</Nav.Link>
-            <Nav.Link as={NavLink} to="/shopping">Shopping Cart</Nav.Link>
+      <div>
+        <NavBar />
 
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
 
 
       <Routes>
         <Route path="register" element={<Register />} />
         <Route path="login" element={<LoginA />} />
-        <Route path="/admin" element={
+        <Route path="ordersdash" element={
           <PrivateRoute>
-            <Admin/>
+            <OrdersDashA/>
           </PrivateRoute>
         }
         />
@@ -54,7 +48,7 @@ function App() {
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
         <Route path="profile" element={<Profile />} />
         <Route path="order_history" element={<OrderHistory />} />
-        <Route path="ordersdash" element={<OrdersDashA />} />
+{/*         <Route path="ordersdash" element={<OrdersDashA />} /> */}
         <Route path="payment-successful" element={<PaymentSuccess />} />
       </Routes>
     </div>
