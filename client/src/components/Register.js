@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+//import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../register.css";
 import { Link } from "react-router-dom";

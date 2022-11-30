@@ -129,7 +129,7 @@ function Login() {
         </MDBCol>
 
         <MDBCol sm='6' className='d-none d-sm-block px-0'>
-          <img src="https://cdn.pixabay.com/photo/2015/06/01/23/43/pasta-794464_960_720.jpg"
+          <img src="https://www.simpleimageresizer.com/_uploads/photos/ebd7aab0/pasta-ga6821ad9e_1920_2_75.jpeg"
             alt="Login image" className="w-100" style={{objectFit: 'cover', objectPosition: 'left'}} />
         </MDBCol>
 

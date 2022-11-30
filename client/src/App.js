@@ -22,6 +22,7 @@ import PaymentSuccess from "./components/PaymentSuccess";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CartNadia from "./components/CartNadia";
+import Container from 'react-bootstrap/Container';
 
 function App() {
   return (
