@@ -1,40 +1,38 @@
 # FSPT12-final-project
 
-### Setting up Database
+Kriska scaffolded (thanks!)
 
-###
+# For all teammates: Github Collab instructions: 
 
-###
+And after every pull, remember to npm install in both back and front end
 
-### Setting up the Payment feature
+![](client/src/Screen%20Shot%202022-11-16%20at%207.05.37%20PM.png)
+![](client/src/Screen%20Shot%202022-11-16%20at%207.05.57%20PM.png)
+![](client/src/Screen%20Shot%202022-11-16%20at%207.06.14%20PM.png)
+![](client/src/Screen%20Shot%202022-11-16%20at%207.06.27%20PM.png)
 
-* Install the Stripe dependency: npm install react-stripe-checkout
-* Install the following in the project folder: npm install stripe uuid cors
-* Install Axios: npm install axios
-* For user alerts about payment: npm install --save react-toastify
-* Generate your own Stripe API key and add it in Payment.js (inside the stripeKey attribute of the StripeCheckout component)
-* in index.js (in the root) add your Secret Key from your Stripe dashboard in the second paranthesis of const stripe
-Safi's feature
-Kriska's feature
-Hi..
+# Spoonacular API 
 
-# How to run mySQL database
+Nadezda wrote "You probably cannot run the recipe search engine unless you create an .env file in the client folder and add there
 
-1. Create .env file in the root directory with the following structure:
+ REACT_APP_API_KEY=YOUR_SPOONACULAR_API_KEY 
+ 
+ that you get when signing up to the spoonacular api"
 
-DB_HOST=localhost
-DB_USER=root
-DB_NAME=recipe_app
-DB_PASS=your_password
-
-2. Open a new terminal for mysql and run: 
-
+ # To create mysql database:
 mysql -u root -p
 
-Provide your password. 
+# Dependencies
 
-Create a database called "recipe_app" with the command "create database recipe_app" 
-
-3. In the root folder, run another terminal, run "npm run migrate". This should create all four tables: users, recipes_saved, ingredients and orders 
-
-
+Axios
+bcrypt
+Jwt (jsonwebtoken)
+Font awesome
+mdb-react-ui-kit
+react-icons
+bootstrap
+react-bootstrap
+react-router-dom
+cors
+mysql2
+noty

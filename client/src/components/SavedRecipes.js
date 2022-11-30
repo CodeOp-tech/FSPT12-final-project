@@ -28,17 +28,22 @@ export default function SavedRecipes() {
     
     const deleteRecipe = async(recipe_ID) => {
         // delete a recipe from the database
-        const response = await fetch(`/saved_recipes/${recipe_ID}`, {
-            method: "DELETE"    
-        });   
-            const recipes = await response.json();
-            setRecipes(recipes); 
-            alert("Recipe deleted successfully!");   
+        try {
+            const response = await fetch(`/saved_recipes/${recipe_ID}`, {
+                method: "DELETE"    
+            });   
+                const recipes = await response.json();
+                setRecipes(recipes); 
+                alert("Recipe deleted successfully!");   
+            }
+        catch (err) {
+            return err;
+        }
     }
 
     const navigateToCart = () => {
      
-      navigate('/cartN');
+      navigate('/shopping');
 
     }
 
@@ -62,9 +67,10 @@ export default function SavedRecipes() {
      
  
   return (
-    <div>
-      <h1 className='text-center'>Welcome to your favourite recipes</h1>  
-      <div className="container">
+    <div className="container-xxl">
+      <div className="mt-5 mb-5">
+        <h1 className="text-left">Saved Recipes</h1>
+      </div>
 
     <div className="row">
 
@@ -83,7 +89,7 @@ export default function SavedRecipes() {
                       </Card.Title>
                       <div className="d-flex flex-wrap justify-content-center">
                          {/* check if the recipe is already added to the cart of not */}
-                        {(recipe.recipe_orderStatus==1) ?
+                        {(recipe.recipe_orderStatus===1) ?
 
                         <Button 
                         className="mt-2 w-100 align-self-end"
@@ -105,7 +111,6 @@ export default function SavedRecipes() {
                 </div> 
       ) } )} 
 
-    </div>
     </div>
     </div>
 

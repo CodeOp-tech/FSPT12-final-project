@@ -44,6 +44,6 @@ CREATE TABLE `orders`(
     `user_id` INT NOT NULL,
     `payment_date` DATETIME NULL,
     `delivery_status` TINYINT(1) NOT NULL,
-    `ordered_ingredients` VARCHAR(999) NULL,
+    `ordered_ingredients` VARCHAR(999) NOT NULL,
     PRIMARY KEY(id)
 );
