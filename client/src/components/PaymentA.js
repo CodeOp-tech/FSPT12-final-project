@@ -36,7 +36,7 @@ export default function PaymentA() {
         },
         body: JSON.stringify({
           order_cost: totalPrice,
-          //delivery_cost:,
+          delivery_cost:0,
           user_id: 1,
           payment_date: DateTime.now(),
           delivery_status: 0,
