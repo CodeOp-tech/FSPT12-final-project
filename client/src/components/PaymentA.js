@@ -11,7 +11,8 @@ export default function PaymentA() {
   //create logic for counting delivery cost
 
   const navigate = useNavigate();
-  const { orderedIngredients, setOrderedIngredients, totalPrice } = useContext(Context);
+  const { orderedIngredients, setOrderedIngredients, totalPrice } =
+    useContext(Context);
 
   console.log(orderedIngredients);
 
@@ -24,26 +25,29 @@ export default function PaymentA() {
     const savePaidOrder = async () => {
       //create an array of strings from ingredients to be stored in the DB
       const ingredientsArray = [];
-      orderedIngredients.forEach(ingredient => ingredientsArray.push(ingredient.name));
+      orderedIngredients.forEach((ingredient) =>
+        ingredientsArray.push(ingredient.name)
+      );
       const ingredientsArrayString = ingredientsArray.join();
       console.log(ingredientsArray);
-      console.log(ingredientsArrayString)
+      console.log(ingredientsArrayString);
 
       const response = await fetch("/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           order_cost: totalPrice,
           delivery_cost: 0,
-          user_id: 1,
           payment_date: DateTime.now(),
           delivery_status: 0,
           ordered_ingredients: ingredientsArrayString,
         }),
       });
       const json = await response.json();
+      console.log(json);
     };
 
     //take the response and check for the status property
@@ -64,9 +68,9 @@ export default function PaymentA() {
         <h1 className="text-center m-5">Payment checkout</h1>
         <h2 className="text-center m-5">Order Summary</h2>
         <ul>
-        {orderedIngredients.map((ingredient) => (
-          <li key={ingredient.id}>{ingredient.name}</li>
-        ))}
+          {orderedIngredients.map((ingredient) => (
+            <li key={ingredient.id}>{ingredient.name}</li>
+          ))}
         </ul>
         <h2>In Total: {totalPrice.toFixed(2)} USD </h2>{" "}
         {/*How do I get the order_cost from the database? Which ID do I use, if the ingredients are stored in a state, and not in the DB*/}
@@ -75,7 +79,7 @@ export default function PaymentA() {
             className="pay-btn m-5"
             stripeKey="pk_test_51M56f8C8rWbcbjLQhdLEyScdQrQL4wj3RFqGlXaGPlXSl2lGnKXr9BjCQR9WD1uhtZfPy7GvuW276GBZMIFhUL1500xXgunrmM"
             token={handleToken}
-            amount={totalPrice*100}
+            amount={totalPrice * 100}
             //name={order.name}
             billingAddress
             shippingAddress

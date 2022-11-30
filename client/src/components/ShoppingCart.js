@@ -43,7 +43,7 @@ export default function ShoppingCart() {
 
   function handleCheckout(price) {
     // add the selected recipe to the saved_recipes table
-    fetch("/orders", {
+    /* fetch("/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default function ShoppingCart() {
     }).then((res) => res.json())
     .catch((error) => {
       console.log(error);
-    });
+    }); */
 
     alert("Your order is accepted");
     navigate('/payment');
