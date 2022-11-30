@@ -95,7 +95,7 @@ function Navbar(props) {
                 )}
                 <MDBNavbarItem>
                   <NavLink
-                    to="/saved_recipes"
+                    to="/shopping"
                     style={{ textDecoration: "none" }}
                     className="cart"
                   >
@@ -149,7 +149,7 @@ function Navbar(props) {
                   </MDBNavbarItem>
                 <MDBNavbarItem>
                   <NavLink
-                    to="/saved_recipes"
+                    to="/shopping"
                     style={{ textDecoration: "none" }}
                     className="cart"
                   >
