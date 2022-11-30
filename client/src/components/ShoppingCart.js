@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Button } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import Ingredient from "./Ingredient";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../Context";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
@@ -12,8 +13,10 @@ export default function ShoppingCart() {
   const [ingredients, setIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [clickedID, setID] = useState();
-  const [totalPrice, setTotalPrice] = useState(0);
+  //const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
+
+  const {orderedIngredients, setOrderedIngredients, totalPrice, setTotalPrice} = useContext(Context);
 
   useEffect(() => {
     getRecipes();

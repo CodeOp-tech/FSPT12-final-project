@@ -5,7 +5,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Context } from "../Context";
 import { useContext } from "react";
 import { DateTime } from "luxon";
-import { useNavigate }  from 'react-router-dom';
 
 export default function PaymentA() {
   //create post request to store orders in the 'orders' table --> fetch & display in OrdersDash
@@ -37,7 +36,7 @@ export default function PaymentA() {
         },
         body: JSON.stringify({
           order_cost: totalPrice,
-          delivery_cost: 0,
+          //delivery_cost:,
           user_id: 1,
           payment_date: DateTime.now(),
           delivery_status: 0,
