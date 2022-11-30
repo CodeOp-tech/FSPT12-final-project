@@ -7,12 +7,9 @@ import Register from "./components/Register";
 import LoginA from "./components/LoginA";
 import PaymentA from "./components/PaymentA";
 import RecipesA from "./components/RecipesA";
-import ShoppingA from "./components/ShoppingA";
-import Other from "./components/Other";
+import ShoppingCart from "./components/ShoppingCart";
 import Recipeinfo from "./components/Recipeinfo";
 import Admin from "./components/Admin";
-import Home from "./components/Home";
-//import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
@@ -20,54 +17,20 @@ import OrdersDashA from "./components/OrdersDashA";
 import SavedRecipes from "./components/SavedRecipes";
 import OrderHistory from "./components/OrderHistory";
 import PaymentSuccess from "./components/PaymentSuccess";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CartNadia from "./components/CartNadia";
 import Container from 'react-bootstrap/Container';
-import {
-  MDBNavbar,
-  MDBContainer,
-  MDBIcon,
-  MDBNavbarNav,
-  MDBNavbarItem,
-  MDBNavbarLink,
-  MDBNavbarToggler,
-  MDBNavbarBrand,
-  MDBCollapse,
-  MDBBadge
-} from 'mdb-react-ui-kit';
 import NavBar from "./components/Navbar";
 
 
 
 function App() {
 
-
-  function handleLogoutClick() {
-
-  }
-
-
   return (
     <AuthProvider>
       <div>
         <NavBar />
 
-
-
-{/*       <Navbar className="color-nav" variant="light" style={{color:"white"}} expand="lg">
-        <h3>Recipe Haul</h3>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/recipes">Recipe search</Nav.Link>
-            <Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
-            <Nav.Link as={NavLink} to="/saved_recipes">Saved recipes</Nav.Link>
-            <Nav.Link as={NavLink} to="/cartN">Cart</Nav.Link>
-
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar> */}
 
 
       <Routes>
@@ -82,7 +45,7 @@ function App() {
         <Route path="payment" element={<PaymentA />} />
         <Route path="recipes" element={<RecipesA />} />
         <Route path="saved_recipes" element={<SavedRecipes />} />
-        <Route path="cartN" element={<CartNadia />} />
+        <Route path="shopping" element={<ShoppingCart />} />
         <Route path="recipeinfo/:id" element={<Recipeinfo />} />
         <Route path="profile" element={<Profile />} />
         <Route path="order_history" element={<OrderHistory />} />
@@ -90,7 +53,6 @@ function App() {
         <Route path="payment-successful" element={<PaymentSuccess />} />
       </Routes>
     </div>
-
     </AuthProvider>
   );
 }

@@ -39,11 +39,11 @@ DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS orders;
 CREATE TABLE `orders`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `order_cost` DECIMAL(8, 2) NOT NULL,
+    `order_cost` DECIMAL(8, 2) NOT NULL, 
     `delivery_cost` DECIMAL(8, 2) NOT NULL,
     `user_id` INT NOT NULL,
     `payment_date` DATETIME NULL,
     `delivery_status` TINYINT(1) NOT NULL,
-    `ordered_ingredients` VARCHAR(999) NOT NULL,
+    `ordered_ingredients` VARCHAR(999) NULL,
     PRIMARY KEY(id)
 );
