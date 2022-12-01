@@ -32,7 +32,7 @@ export default function Ingredient({ingredients, servings}) {
 
     if (updatedCheckedState[position]) {
       console.log("Ingredient ordered is: ", ingredients[position]);
-
+console.log("Unit is", ingredients[position].amount.us.unit);
      let ingredient = {
       name: ingredients[position].name,
       price: ingredients[position].price*(serving/servings),
