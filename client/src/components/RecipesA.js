@@ -10,10 +10,8 @@ const BASE_URL = "https://api.spoonacular.com/recipes";
 
 const animatedComponents = makeAnimated();
 
-
 export default function RecipesA() {
-   //console.log(process.env.REACT_APP_API_KEY);
-
+  //console.log(process.env.REACT_APP_API_KEY);
 
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState([]);
@@ -104,31 +102,32 @@ export default function RecipesA() {
     setRecipeIngredients(info);
   };
 
-  function saveRecipe (recipeInfo) {
+  function saveRecipe(recipeInfo) {
     // add the selected recipe to the saved_recipes table
     fetch("/saved_recipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         recipe_ID: recipeInfo.id,
-        user_id: 1,
+        // user_id: 1,
         recipe_image: recipeInfo.image,
         recipe_title: recipeInfo.title,
         recipe_servings: recipeInfo.servings,
         recipe_pricePerServing: recipeInfo.pricePerServing,
         recipe_readyInMinutes: recipeInfo.readyInMinutes,
       }),
-    }).then((res) => res.json())
+    })
+      .then((res) => res.json())
 
-    .catch((error) => {
-
-      console.log(error);
-    });
+      .catch((error) => {
+        console.log(error);
+      });
 
     alert("Recipe saved");
-  };
+  }
 
   const addToCart = (id) => {
     setRecipeId(id);
@@ -140,14 +139,17 @@ export default function RecipesA() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         recipe_orderStatus: 1,
       }),
-    }).then((res) => res.json())
+    })
+      .then((res) => res.json())
 
-    .catch((error) => {
-      console.log(error);});
+      .catch((error) => {
+        console.log(error);
+      });
 
     alert("Recipe added to cart!");
   };

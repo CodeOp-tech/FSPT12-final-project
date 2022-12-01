@@ -28,7 +28,12 @@ export default function ShoppingCart() {
   }, [clickedID]);
 
   const getRecipes = () => {
-    fetch("/saved_recipes")
+    fetch("/saved_recipes", {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((json) => json.filter((e) => e.recipe_orderStatus === 1))
       .then((json) => setRecipes(json))
@@ -121,9 +126,9 @@ export default function ShoppingCart() {
       </div>
 
       <div className="row mb-4">
-        {recipes.map((recipe) => {
+        {recipes.map((recipe, i) => {
           return (
-            <div className="w-100 mb-4 text-center" key={recipe.recipe_ID}>
+            <div className="w-100 mb-4 text-center" key={i}>
               <div className="d-flex h-100">
                 <Card className="col-md-2 h-100">
                   <Card.Img
