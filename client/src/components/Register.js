@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../register.css";
 import { Link } from "react-router-dom";
@@ -116,7 +116,7 @@ function Register() {
                   </MDBRow>
 
                   <MDBCheckbox name='flexCheck' id='flexCheckDefault' labelClass='text-white mb-4' label='I accept the Terms and Conditions.' />
-                  <MDBBtn  onClick={login} color="warning" size='lg'>Register</MDBBtn>
+                  <button onClick={login} type="button" class="btn btn-warning" size='lg'>Register</button>
 
                 </MDBCol>
               </MDBRow>

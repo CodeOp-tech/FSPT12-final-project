@@ -27,7 +27,7 @@ function Navbar(props) {
       {auth.isLoggedIn ? (
         <MDBNavbar className="bg-nav" expand="lg">
           <MDBContainer fluid>
-            <MDBNavbarBrand href="/recipes">Recipe Haul</MDBNavbarBrand>
+            <MDBNavbarBrand href="/recipes" style={{fontFamily:'Shrikhand'}}>Recipe Haul</MDBNavbarBrand>
             <MDBNavbarToggler
               type="button"
               data-target="#navbarColor02"
@@ -94,6 +94,20 @@ function Navbar(props) {
                   </MDBNavbarItem>
                 )}
                 <MDBNavbarItem>
+                <NavLink
+                    to="/shopping"
+                    style={{ textDecoration: "none" }}
+                    className="cart"
+                  >
+            <MDBNavbarLink href='#'>
+              <MDBBadge pill color='warning'>6</MDBBadge>
+              <span>
+                <MDBIcon fas icon='shopping-cart' style={{color:"#668835"}}></MDBIcon>
+              </span>
+            </MDBNavbarLink>
+            </NavLink>
+          </MDBNavbarItem>
+                {/* <MDBNavbarItem>
                   <NavLink
                     to="/shopping"
                     style={{ textDecoration: "none" }}
@@ -101,7 +115,7 @@ function Navbar(props) {
                   >
                     <MDBNavbarLink href="#">Cart</MDBNavbarLink>
                   </NavLink>
-                </MDBNavbarItem>
+                </MDBNavbarItem> */}
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>
@@ -147,15 +161,20 @@ function Navbar(props) {
                       </MDBNavbarLink>
                     </NavLink>
                   </MDBNavbarItem>
-                <MDBNavbarItem>
-                  <NavLink
+                  <MDBNavbarItem>
+                <NavLink
                     to="/shopping"
                     style={{ textDecoration: "none" }}
                     className="cart"
                   >
-                    <MDBNavbarLink href="#">Cart</MDBNavbarLink>
-                  </NavLink>
-                </MDBNavbarItem>
+            <MDBNavbarLink href='#'>
+              <MDBBadge pill color='danger'>6</MDBBadge>
+              <span>
+                <MDBIcon fas icon='shopping-cart'></MDBIcon>
+              </span>
+            </MDBNavbarLink>
+            </NavLink>
+          </MDBNavbarItem>
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>

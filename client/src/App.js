@@ -9,7 +9,6 @@ import PaymentA from "./components/PaymentA";
 import RecipesA from "./components/RecipesA";
 import ShoppingCart from "./components/ShoppingCart";
 import Recipeinfo from "./components/Recipeinfo";
-import Admin from "./components/Admin";
 import AuthProvider from "./components/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";

@@ -69,7 +69,7 @@ export default function RecipesA() {
 
   const getRecipes = async () => {
     const api = await fetch(
-      `${BASE_URL}/complexSearch?apiKey=a072be7433bd4f29b08e974c3ee7997d&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
+      `${BASE_URL}/complexSearch?apiKey=8a8671e063144f1e8170b3cc5687a79f&query=${userInput}&diet=${dietAPI}&intolerances=${intoleranceAPI}&type=${mealTypeAPI}&number=${recipeCount}&addRecipeInformation=true`
     );
     const data = await api.json();
     console.log(data);
@@ -262,7 +262,7 @@ export default function RecipesA() {
           <div className="col-md-8">
             <button
               onClick={handleSearch}
-              className="btn btn-success center mb-4"
+              className="btn btn-warning center mb-4"
               type="submit"
             >
               Search recipes
@@ -295,19 +295,19 @@ export default function RecipesA() {
                       </Card.Title>
                       <div className="d-flex flex-wrap justify-content-center">
                         <Button
-                          className="mt-2 w-100 align-self-end"
+                          className="btn btn-warning mt-2 w-100 align-self-end"
                           onClick={() => viewRecipe(recipe.id)}
                         >
                           View recipe
                         </Button>
                         <Button
-                          className="mt-2 w-100 align-self-end"
+                          className="btn btn-warning mt-2 w-100 align-self-end"
                           onClick={() => addToCart(recipe.id)}
                         >
                           Add to cart
                         </Button>
                         <Button
-                          className="mt-2 w-100 align-self-end"
+                          className="btn btn-warning mt-2 w-100 align-self-end"
                           onClick={() => saveRecipe(recipe)}
                         >
                           Save to favourites

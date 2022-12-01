@@ -130,7 +130,7 @@ export default function ShoppingCart() {
                       {recipe.recipe_title}
                     </Card.Title>
                     <Button
-                          className="mt-2 w-100 align-self-end"
+                          className="mt-2 w-100 align-self-end btn btn-warning"
                           onClick={() => deleteRecipe(recipe.recipe_ID)}
                         >
                           Delete recipe
@@ -153,7 +153,7 @@ export default function ShoppingCart() {
                             ingredients={ingredients}
                             servings={recipe.recipe_servings}
                           />
-                          <button onClick={addToOrder}>Add to order</button>
+                          <button clasName="btn btn-warning" onClick={addToOrder}>Add to order</button>
                         </>
                       )}
                     </Accordion.Body>
@@ -166,7 +166,7 @@ export default function ShoppingCart() {
 
         <div className="d-flex flex-wrap mt-4">
           <div className="w-100 d-flex justify-content-end"><h4>Total price: {getFormattedPrice(totalPrice)}</h4></div>
-          <div className="w-100 d-flex justify-content-end"><Button onClick={() => handleCheckout(totalPrice)}>Checkout</Button></div>
+          <div className="w-100 d-flex justify-content-end"><Button className="btn btn-warning" onClick={() => handleCheckout(totalPrice)}>Checkout</Button></div>
         </div>
       </div>
     </div>

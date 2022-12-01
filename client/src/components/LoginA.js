@@ -18,8 +18,8 @@ import "noty/lib/noty.css";
 
 function Login() {
   const [user, setUser] = useState({
-    email: "test",
-    password: "test",
+    email: "",
+    password: "",
   });
 
   const auth = useAuth();
@@ -107,8 +107,8 @@ function Login() {
         <MDBCol sm='6'>
 
           <div className='d-flex flex-row ps-5 pt-5'>
-            <MDBIcon fas icon="carrot fa-3x me-3" style={{ color: '#709085' }}/>
-            <span className="h1 fw-bold mb-0">Recipe Haul</span>
+            <MDBIcon fas icon="carrot fa-3x me-3" style={{ color: '#EF9A40' }}/>
+            <span className="h1 fw-bold mb-0" style={{fontFamily: 'Shrikhand'}}>Recipe Haul</span>
           </div>
 
           <div className='d-flex flex-column justify-content-center h-custom-2 w-75 pt-4'>
@@ -120,8 +120,7 @@ function Login() {
             <MDBInput wrapperClass='mb-4 mx-5 w-100' value={user.password}
           onChange={handleChange} name= "password" label='Password' id='2formControlLg' type='password' size="lg"/>
 
-            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg' onClick={login}>Login</MDBBtn>
-            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg' onClick={logout}>Logout</MDBBtn>
+            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='warning' size='lg' onClick={login}>Login</MDBBtn>
             <p className='ms-5'>Don't have an account? <a href="/register" className="link-info" >Register here</a></p>
 
           </div>

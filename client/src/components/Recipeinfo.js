@@ -40,8 +40,8 @@ export default function Recipeinfo({
                 <p><strong>Price per serving:  {getFormattedPrice(recipeInfo.pricePerServing/100)}</strong></p>
                 <p><strong>Ready in: {recipeInfo.readyInMinutes} minutes</strong></p>
                 <div className="d-flex w-100">
-                  <button className="btn btn-success" onClick={addToCart}>Add to cart</button>
-                  <button className="btn btn-success ms-1" onClick={saveRecipe}>Save recipe</button>
+                  <button className="btn btn-warning" onClick={addToCart}>Add to cart</button>
+                  <button className="btn btn-warning ms-1" onClick={saveRecipe}>Save recipe</button>
                 </div>
               </div>
             </div>

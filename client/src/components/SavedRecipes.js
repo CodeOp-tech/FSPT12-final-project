@@ -99,15 +99,15 @@ export default function SavedRecipes() {
                         {(recipe.recipe_orderStatus===1) ?
 
                         <Button 
-                        className="mt-2 w-100 align-self-end"
+                        className="mt-2 w-100 align-self-end btn btn-warning"
                         onClick={navigateToCart}>View cart</Button>       
                          :
                          <Button 
-                         className="mt-2 w-100 align-self-end"
+                         className="mt-2 w-100 align-self-end btn btn-warning"
                          onClick={()=>addToCart(recipe.recipe_ID)}>Add to cart</Button>       
                         }
                         <Button
-                          className="mt-2 w-100 align-self-end"
+                          className="mt-2 w-100 align-self-end btn btn-warning"
                           onClick={() => deleteRecipe(recipe.recipe_ID)}
                         >
                           Delete recipe
