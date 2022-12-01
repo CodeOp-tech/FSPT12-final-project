@@ -18,7 +18,7 @@ function Navbar(props) {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
   const [showNavColorThird, setShowNavColorThird] = useState(false);
   const auth = useAuth();
-  console.log(auth);
+
   function handleLogout() {
     auth.signout();
   }
@@ -51,27 +51,27 @@ function Navbar(props) {
                     </MDBNavbarLink>
                   </NavLink>
                 </MDBNavbarItem>
-                  <MDBNavbarItem>
-                    <NavLink
-                      to="/saved_recipes"
-                      style={{ textDecoration: "none" }}
-                      className="login_signup"
-                    >
-                      <MDBNavbarLink href="#">Saved Recipes</MDBNavbarLink>
-                    </NavLink>
-                  </MDBNavbarItem>
-     
-                  <MDBNavbarItem>
-                    <NavLink
-                      to="/recipes"
-                      style={{ textDecoration: "none" }}
-                      className="login_signup"
-                    >
-                      <MDBNavbarLink href="#" onClick={handleLogout}>
-                        Logout
-                      </MDBNavbarLink>
-                    </NavLink>
-                  </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <NavLink
+                    to="/saved_recipes"
+                    style={{ textDecoration: "none" }}
+                    className="login_signup"
+                  >
+                    <MDBNavbarLink href="#">Saved Recipes</MDBNavbarLink>
+                  </NavLink>
+                </MDBNavbarItem>
+
+                <MDBNavbarItem>
+                  <NavLink
+                    to="/recipes"
+                    style={{ textDecoration: "none" }}
+                    className="login_signup"
+                  >
+                    <MDBNavbarLink href="#" onClick={handleLogout}>
+                      Logout
+                    </MDBNavbarLink>
+                  </NavLink>
+                </MDBNavbarItem>
                 {auth.isAdmin ? (
                   <MDBNavbarItem>
                     <NavLink
@@ -133,20 +133,17 @@ function Navbar(props) {
                     </MDBNavbarLink>
                   </NavLink>
                 </MDBNavbarItem>
-                  <MDBNavbarItem>
-                    <NavLink
-                      to="/login"
-                      style={{ textDecoration: "none" }}
-                      className="login_signup"
-                    >
-                      <MDBNavbarLink
-                        href="#"
-                        onClick={() => console.log("here")}
-                      >
-                        Login/Register
-                      </MDBNavbarLink>
-                    </NavLink>
-                  </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <NavLink
+                    to="/login"
+                    style={{ textDecoration: "none" }}
+                    className="login_signup"
+                  >
+                    <MDBNavbarLink href="#" onClick={() => console.log("here")}>
+                      Login/Register
+                    </MDBNavbarLink>
+                  </NavLink>
+                </MDBNavbarItem>
                 <MDBNavbarItem>
                   <NavLink
                     to="/shopping"

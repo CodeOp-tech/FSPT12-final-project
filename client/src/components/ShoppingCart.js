@@ -16,7 +16,12 @@ export default function ShoppingCart() {
   //const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
 
-  const {orderedIngredients, setOrderedIngredients, totalPrice, setTotalPrice} = useContext(Context);
+  const {
+    orderedIngredients,
+    setOrderedIngredients,
+    totalPrice,
+    setTotalPrice,
+  } = useContext(Context);
 
   useEffect(() => {
     getRecipes();
@@ -38,6 +43,7 @@ export default function ShoppingCart() {
     const priceOfRecipe = +window.document
       .getElementById("price")
       .innerText.replace(/^\D+/g, "");
+    console.log({ priceOfRecipe });
     setTotalPrice((prev) => prev + priceOfRecipe);
   }
 
@@ -58,7 +64,7 @@ export default function ShoppingCart() {
     }); */
 
     alert("Your order is accepted");
-    navigate('/payment');
+    navigate("/payment");
   }
 
   const handleClick = async (id) => {
@@ -77,32 +83,30 @@ export default function ShoppingCart() {
   };
 
   const deleteRecipe = (id) => {
-     setID(id);
+    setID(id);
 
     let confirmed = window.confirm(
       "Are you sure you want to delete this recipe from the cart?"
     );
     if (confirmed) {
-    // 4. In recipes_saved, put orderStatus to false = 0
+      // 4. In recipes_saved, put orderStatus to false = 0
       fetch(`/saved_recipes/${id}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          'recipe_orderStatus': 0, 
-        }) 
+          recipe_orderStatus: 0,
+        }),
       })
-      .then (res => res.json())
-      .catch((error) => {
-        console.log(error);});
+        .then((res) => res.json())
+        .catch((error) => {
+          console.log(error);
+        });
 
       alert("Recipe deleted from cart!");
-      }
-
-     }
-
-
+    }
+  };
 
   return (
     <div className="container-xxl">
@@ -111,7 +115,9 @@ export default function ShoppingCart() {
       </div>
 
       <div className="d-flex flex-wrap row">
-        <div className="w-100 mb-4">Select ingredients to add to your cart.</div>
+        <div className="w-100 mb-4">
+          Select ingredients to add to your cart.
+        </div>
       </div>
 
       <div className="row mb-4">
@@ -130,11 +136,11 @@ export default function ShoppingCart() {
                       {recipe.recipe_title}
                     </Card.Title>
                     <Button
-                          className="mt-2 w-100 align-self-end"
-                          onClick={() => deleteRecipe(recipe.recipe_ID)}
-                        >
-                          Delete recipe
-                        </Button>
+                      className="mt-2 w-100 align-self-end"
+                      onClick={() => deleteRecipe(recipe.recipe_ID)}
+                    >
+                      Delete recipe
+                    </Button>
                   </Card.Body>
                 </Card>
 
@@ -165,8 +171,12 @@ export default function ShoppingCart() {
         })}
 
         <div className="d-flex flex-wrap mt-4">
-          <div className="w-100 d-flex justify-content-end"><h4>Total price: {getFormattedPrice(totalPrice)}</h4></div>
-          <div className="w-100 d-flex justify-content-end"><Button onClick={() => handleCheckout(totalPrice)}>Checkout</Button></div>
+          <div className="w-100 d-flex justify-content-end">
+            <h4>Total price: {getFormattedPrice(totalPrice)}</h4>
+          </div>
+          <div className="w-100 d-flex justify-content-end">
+            <Button onClick={() => handleCheckout(totalPrice)}>Checkout</Button>
+          </div>
         </div>
       </div>
     </div>

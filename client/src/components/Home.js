@@ -1,26 +1,11 @@
-/* import React, { useEffect } from 'react'
-
-export default function Home() {
-    const[user, setUser] = useState()
-    useEffect(()=>
-    //getUserById ... setUser, fill in this elipses 
-        getUserById
-    }, [])
-  return (
-    //make Admin and profile buttons
-    <div>Home
-        {user.role === 'admin' ? <h1>Admin</h1> : <h1>profile</h1>}
-    </div>
-  )
-} */
-
 import React from "react";
+import ingredientsImage from "../images/ingredients.jpeg";
+import { MDBContainer } from "mdb-react-ui-kit";
 
 export default function Home() {
   return (
-    <div>
-      Home
-      <h1>this is very private</h1>
-    </div>
+    <MDBContainer>
+      <img src={ingredientsImage} className="img-fluid shadow-4 pt-5" />
+    </MDBContainer>
   );
 }
