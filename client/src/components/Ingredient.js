@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import "./Ingredient.css";
 import { Context } from "../Context";
 
@@ -12,34 +12,38 @@ export default function Ingredient({ingredients, servings}) {
 
   const defaultState =  new Array(ingredients.length).fill(false); 
   const [checkedState, setCheckedState] = useState(()=> (defaultState));
-
     console.log(new Array(ingredients.length).fill(false))
     console.log("Checked state is", checkedState);
 
   const [serving, setServings] = useState(servings);
-
-
   const [total, setTotal] = useState(0);
   const {orderedIngredients, setOrderedIngredients} = useContext(Context);
-
+ 
 
   
-  const handleOnChange = (position) => {
+  const handleOnChange = (position, serving) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
-    console.log("Checked state is: ",checkedState);
-
-    console.log("Updated checked state is: ",updatedCheckedState);
+   // console.log("Checked state is: ",checkedState);
+   // console.log("Updated checked state is: ",updatedCheckedState);
 
     if (updatedCheckedState[position]) {
-     setOrderedIngredients([...orderedIngredients, ingredients[position]]);
-    console.log("Ingredient ordered is: ", ingredients[position]);
+      console.log("Ingredient ordered is: ", ingredients[position]);
+
+     let ingredient = {
+      name: ingredients[position].name,
+      price: ingredients[position].price*(serving/servings),
+      amount: ingredients[position].amount.us.value*(serving/servings),
+      unit: ingredients[position].amount.us.unit,
+      image: `https://spoonacular.com/cdn/ingredients_100x100/${ingredients[position].image}`
+     };      
+    console.log("Ingredient info for given servings: ", ingredient);
+    setOrderedIngredients([...orderedIngredients, ingredient]);
     } else { 
       console.log("Remove this ingredient from the array by some unique id");
-
   }
 
     const totalPrice = updatedCheckedState.reduce(
@@ -78,7 +82,7 @@ export default function Ingredient({ingredients, servings}) {
                     name={name}
                     value={name}
                     checked={checkedState[index]}
-                    onChange={() => handleOnChange(index)}
+                    onChange={() => handleOnChange(index, serving)}
                   />
                   <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
                 </div>
