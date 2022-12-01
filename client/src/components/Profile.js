@@ -129,7 +129,7 @@ const User = () => {
           </section>
 
           <div className="saved" style={{ paddingLeft: 20 }}>
-            <Link to="/recipes">
+            <Link to="/saved_recipes">
               <h4>Saved Recipes</h4>
             </Link>
             <Link to="/order_history">View Order History</Link>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DateTime } from "luxon";
+const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
+
 
 export default function OrderDashA() {
   const [orders, setOrders] = useState([]);
@@ -75,7 +77,7 @@ export default function OrderDashA() {
                 {order.address}, {order.city}, {order.zipcode}
               </td>
               <td>{order.ordered_ingredients}</td>
-              <td>{order.order_cost} USD</td>
+              <td>{getFormattedPrice(order.order_cost)}</td>
               <td>
                 {DateTime.fromISO(order.payment_date).toLocaleString(
                   DateTime.DATETIME_MED
@@ -121,7 +123,7 @@ export default function OrderDashA() {
                 {order.address}, {order.city}, {order.zipcode}
               </td>
               <td>{order.ordered_ingredients}</td>
-              <td>{order.order_cost} USD</td>
+              <td>{getFormattedPrice(order.order_cost)}</td>
               <td>
                 {DateTime.fromISO(order.payment_date).toLocaleString(
                   DateTime.DATETIME_MED

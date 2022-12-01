@@ -6,12 +6,15 @@ import { Context } from "../Context";
 import { useContext } from "react";
 import { DateTime } from "luxon";
 
+const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
+
+
 export default function PaymentA() {
   //create post request to store orders in the 'orders' table --> fetch & display in OrdersDash
   //create logic for counting delivery cost
 
   const navigate = useNavigate();
-  const { orderedIngredients, setOrderedIngredients, totalPrice } =
+  const { orderedIngredients, totalPrice } =
     useContext(Context);
 
   console.log(orderedIngredients);
@@ -72,7 +75,7 @@ export default function PaymentA() {
             <li key={ingredient.id}>{ingredient.name}</li>
           ))}
         </ul>
-        <h2>In Total: {totalPrice.toFixed(2)} USD </h2>{" "}
+        <h2>In Total: {getFormattedPrice(totalPrice)} </h2>{" "}
         {/*How do I get the order_cost from the database? Which ID do I use, if the ingredients are stored in a state, and not in the DB*/}
         <div className="form-group container">
           <StripeCheckout

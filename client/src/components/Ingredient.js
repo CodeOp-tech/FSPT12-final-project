@@ -30,8 +30,15 @@ export default function Ingredient({ ingredients, servings }) {
     console.log("Updated checked state is: ", updatedCheckedState);
 
     if (updatedCheckedState[position]) {
-      setOrderedIngredients([...orderedIngredients, ingredients[position]]);
-      console.log("Ingredient ordered is: ", ingredients[position]);
+      let ingredient = {
+        name: ingredients[position].name,
+        price: ingredients[position].price*(serving/servings),
+        amount: ingredients[position].amount.us.value*(serving/servings),
+        unit: ingredients[position].amount.us.unit,
+        image: `https://spoonacular.com/cdn/ingredients_100x100/${ingredients[position].image}`
+       };      
+      console.log("Ingredient info for given servings: ", ingredient);
+      setOrderedIngredients([...orderedIngredients, ingredient]);
     } else {
       console.log("Remove this ingredient from the array by some unique id");
     }
