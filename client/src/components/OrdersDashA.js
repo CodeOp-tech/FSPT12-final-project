@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Context } from "../Context";
-import { useContext } from "react";
 import { DateTime } from "luxon";
 
 export default function OrderDashA() {
@@ -40,18 +38,9 @@ export default function OrderDashA() {
     );
 
     if (confirmed) {
-      const response = await fetch(`/orders/${id}`, {
+      await fetch(`/orders/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          delivery_status: 1,
-        }),
       });
-      const json = await response.json();
-      console.log(json);
-      //setOrders(json);
       getDeliveredOrders();
       getOrders();
     }
@@ -79,8 +68,12 @@ export default function OrderDashA() {
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.email}</td>
-              <td>{order.firstname} {order.lastname}</td>
-              <td>{order.address}, {order.city}, {order.zipcode}</td>
+              <td>
+                {order.firstname} {order.lastname}
+              </td>
+              <td>
+                {order.address}, {order.city}, {order.zipcode}
+              </td>
               <td>{order.ordered_ingredients}</td>
               <td>{order.order_cost} USD</td>
               <td>
@@ -121,8 +114,12 @@ export default function OrderDashA() {
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.email}</td>
-              <td>{order.firstname} {order.lastname}</td>
-              <td>{order.address}, {order.city}, {order.zipcode}</td>
+              <td>
+                {order.firstname} {order.lastname}
+              </td>
+              <td>
+                {order.address}, {order.city}, {order.zipcode}
+              </td>
               <td>{order.ordered_ingredients}</td>
               <td>{order.order_cost} USD</td>
               <td>
